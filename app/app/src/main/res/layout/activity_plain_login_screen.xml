@@ -30,7 +30,7 @@
         app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/usernameField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
-        android:id="@+id/editText9"
+        android:id="@+id/passwordField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -55,7 +55,7 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText8" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameField" />
 
     <CheckBox
         android:id="@+id/checkBox"
@@ -66,7 +66,7 @@
         android:checked="true"
         android:text="Remember password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText9" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
 
     <TextView
         android:id="@+id/textView10"
@@ -77,10 +77,10 @@
         android:text="Forgot?"
         android:textColor="#000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText9" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/loginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -97,7 +97,7 @@
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     <Button
-        android:id="@+id/buttonRegister"
+        android:id="@+id/registerButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

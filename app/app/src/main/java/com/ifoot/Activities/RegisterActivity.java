@@ -11,7 +11,6 @@ import android.widget.Button;
 
 
 import com.ifoot.R;
-import com.ifoot.Services.UserService;
 
 
 public class RegisterActivity extends AppCompatActivity {

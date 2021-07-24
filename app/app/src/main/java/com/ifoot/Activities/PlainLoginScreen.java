@@ -6,12 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 import com.ifoot.R;
-import com.ifoot.Services.UserService;
-
-import java.util.concurrent.ExecutionException;
+import com.ifoot.Services.user.LoginService;
 
 
 public class PlainLoginScreen extends AppCompatActivity {
@@ -22,7 +21,7 @@ public class PlainLoginScreen extends AppCompatActivity {
         setContentView(R.layout.activity_plain_login_screen);
 
 
-        Button next = (Button) findViewById(R.id.buttonRegister);
+        Button next = (Button) findViewById(R.id.registerButton);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent myIntent = new Intent(view.getContext(), RegisterActivity.class);
@@ -31,16 +30,16 @@ public class PlainLoginScreen extends AppCompatActivity {
 
         });
 
-        Button next2 = (Button) findViewById(R.id.button3);
+        Button next2 = (Button) findViewById(R.id.loginButton);
         next2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                try {
-                    String token = new UserService().login();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                EditText username = findViewById(R.id.usernameField);
+                EditText password = findViewById(R.id.passwordField);
+                String token = new LoginService().startTask(username.getText().toString(), password.getText().toString());
+                if (token != null) {
+                    Intent myIntent = new Intent(view.getContext(), MatchList.class);
+                    startActivityForResult(myIntent, 0);
                 }
-                Intent myIntent = new Intent(view.getContext(), MatchList.class);
-                startActivityForResult(myIntent, 0);
             }
 
         });

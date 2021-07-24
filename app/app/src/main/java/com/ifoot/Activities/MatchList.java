@@ -4,17 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 
-import com.google.gson.JsonObject;
-import com.ifoot.Adapters.MatchListAdapter;
 import com.ifoot.R;
-import com.ifoot.Services.UserService;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
