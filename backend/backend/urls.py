@@ -1,13 +1,10 @@
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .viewsets import *
 
-router = DefaultRouter()
-router.register('api/users', UserViewSet)
-router.register('api/matches', MatchViewSet)
+from backend.api_views import urls
 
 urlpatterns = [
-    path(r'', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('api/', include(urls)),
+
 ]

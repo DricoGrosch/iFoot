@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
-from rest_framework.viewsets import ModelViewSet
 
+from backend.api_views.auth.auth_viewset import LoginRequiredModelViewSet
 from backend.serializers import UserSerializer
 
 
-class UserViewSet(ModelViewSet):
+class UserViewSet(LoginRequiredModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
