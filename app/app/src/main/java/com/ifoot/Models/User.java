@@ -1,4 +1,4 @@
-package Models;
+package com.ifoot.Models;
 
 public class User {
     private String userName;

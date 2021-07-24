@@ -1,7 +1,8 @@
-package Models;
+package com.ifoot.Models;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 
 public class Match {
     private String location;
