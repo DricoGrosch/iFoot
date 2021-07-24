@@ -1,8 +1,17 @@
 package com.ifoot.Models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class User {
+    @SerializedName("userName")
+    @Expose
     private String userName;
+    @SerializedName("password")
+    @Expose
     private String password;
+    @SerializedName("first_name")
+    @Expose
     private String firstName;
 
 
