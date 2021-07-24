@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class MatchListAdapter extends BaseAdapter {
     Context context;
-    ArrayList<Match> matches = new ArrayList<Match>();
+    ArrayList<Integer> matches = new ArrayList<Integer>();
 
-    public MatchListAdapter(Context context, ArrayList<Match> matches) {
+    public MatchListAdapter(Context context, ArrayList<Integer> matches) {
         this.context = context;
         this.matches = matches;
     }

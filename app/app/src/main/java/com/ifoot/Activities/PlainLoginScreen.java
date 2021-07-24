@@ -28,5 +28,14 @@ public class PlainLoginScreen extends AppCompatActivity {
             }
 
         });
+
+        Button next2 = (Button) findViewById(R.id.button3);
+        next2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), MatchList.class);
+                startActivityForResult(myIntent, 0);
+            }
+
+        });
     }
 }
