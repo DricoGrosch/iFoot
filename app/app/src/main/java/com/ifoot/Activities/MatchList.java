@@ -9,8 +9,12 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 
+import com.google.gson.JsonObject;
 import com.ifoot.Adapters.MatchListAdapter;
 import com.ifoot.R;
+import com.ifoot.Services.UserService;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -18,7 +22,8 @@ import java.util.ArrayList;
 public class MatchList extends AppCompatActivity {
     ListView listView;
 
-    ArrayList<String> array= new ArrayList<String>();
+    ArrayList<String> array = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         array.add("1");
@@ -27,7 +32,7 @@ public class MatchList extends AppCompatActivity {
         setContentView(R.layout.activity_match_list);
         listView = findViewById(R.id.listView);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,array);
-            listView.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, array);
+        listView.setAdapter(adapter);
     }
 }

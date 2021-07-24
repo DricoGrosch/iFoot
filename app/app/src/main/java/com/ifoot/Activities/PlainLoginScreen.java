@@ -9,6 +9,9 @@ import android.widget.Button;
 
 
 import com.ifoot.R;
+import com.ifoot.Services.UserService;
+
+import java.util.concurrent.ExecutionException;
 
 
 public class PlainLoginScreen extends AppCompatActivity {
@@ -17,7 +20,6 @@ public class PlainLoginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plain_login_screen);
-
 
 
         Button next = (Button) findViewById(R.id.buttonRegister);
@@ -32,6 +34,11 @@ public class PlainLoginScreen extends AppCompatActivity {
         Button next2 = (Button) findViewById(R.id.button3);
         next2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                try {
+                    String token = new UserService().login();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 Intent myIntent = new Intent(view.getContext(), MatchList.class);
                 startActivityForResult(myIntent, 0);
             }

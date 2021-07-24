@@ -2,15 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ifoot">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.ifoot.Activities.RegisterActivity">
+        <activity android:name="com.ifoot.Activities.PlainLoginScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,8 +23,9 @@
         </activity>
         <activity android:name="com.ifoot.Activities.HomeActivity" />
         <activity android:name="com.ifoot.Activities.MainActivity" />
-        <activity android:name="com.ifoot.Activities.PlainLoginScreen" />
-        <activity android:name="com.ifoot.Activities.MatchList"/>
+        <activity android:name="com.ifoot.Activities.RegisterActivity" />
+        <activity android:name="com.ifoot.Activities.MatchList" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
