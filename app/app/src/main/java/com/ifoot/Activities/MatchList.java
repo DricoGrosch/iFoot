@@ -3,6 +3,8 @@ package com.ifoot.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -18,13 +20,18 @@ public class MatchList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayList<String> stringMatches = new ArrayList<>();
-        for (Match m : new FecthAll().startTask()) {
-            stringMatches.add(m.toString());
-        }
+        ArrayList<Match> matches = new FecthAll().startTask();
         setContentView(R.layout.activity_match_list);
         ListView listView = findViewById(R.id.listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, stringMatches);
+        ArrayAdapter<Match> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, matches);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                todo chamar api de detalhe e direcionar pra tela de detalhe
+                Match item = matches.get(position);
+            }
+        });
     }
 }
