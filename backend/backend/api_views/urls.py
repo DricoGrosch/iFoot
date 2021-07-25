@@ -10,6 +10,6 @@ router.register('match', MatchViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('login', CustomObtainAuthToken.as_view()),
-    path('match/assignment', MatchAssingment.as_view()),
-    path('match/unassignment', MatchUnassingment.as_view())
+    path('match/subscribe', MatchSubscribe.as_view()),
+    path('match/unsubscribe', MatchUnsubscribe.as_view())
 ]

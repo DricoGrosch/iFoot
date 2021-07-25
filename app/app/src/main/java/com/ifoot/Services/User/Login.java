@@ -14,7 +14,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class LoginService {
+public class Login {
     public boolean startTask(String username, String password) {
         try {
             return new LoginTask().execute(username, password).get();
@@ -53,6 +53,7 @@ public class LoginService {
                         user.setFirstName(jsonUser.getString("first_name"));
                         user.setUserName(jsonUser.getString("username"));
                         user.setPassword(jsonUser.getString("password"));
+                        user.setId(jsonUser.getInt("id"));
                         return true;
                     }
                     return false;

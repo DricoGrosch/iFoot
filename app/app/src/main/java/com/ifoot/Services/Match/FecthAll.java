@@ -49,7 +49,7 @@ public class FecthAll {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject o = array.getJSONObject(i);
                     Date matchDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(o.getString("date").replace("T", " ").substring(0, 19));
-                    matches.add(new Match(o.getString("location"), matchDate));
+                    matches.add(new Match(Integer.parseInt(o.getString("id")), o.getString("location"), matchDate));
                 }
 
 

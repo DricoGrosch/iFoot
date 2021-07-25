@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 
 import com.ifoot.R;
-import com.ifoot.Services.User.LoginService;
+import com.ifoot.Services.User.Login;
 
 
 public class PlainLoginScreen extends AppCompatActivity {
@@ -35,7 +35,7 @@ public class PlainLoginScreen extends AppCompatActivity {
             public void onClick(View view) {
                 EditText username = findViewById(R.id.usernameField);
                 EditText password = findViewById(R.id.passwordField);
-                boolean authenticated = new LoginService().startTask(username.getText().toString(), password.getText().toString());
+                boolean authenticated = new Login().startTask(username.getText().toString(), password.getText().toString());
                 if (authenticated) {
                     Intent myIntent = new Intent(view.getContext(), MatchList.class);
                     startActivityForResult(myIntent, 0);

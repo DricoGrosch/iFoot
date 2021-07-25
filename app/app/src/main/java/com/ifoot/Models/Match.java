@@ -10,16 +10,25 @@ import java.util.Date;
 
 
 public class Match {
+    private int id;
     private String location;
-    private float latidude;
+    private float latitude;
     private float longitude;
     private Date date;
     private ArrayList<User> users;
 
+    public int getId() {
+        return id;
+    }
 
-    public Match(String location, Date date) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Match(int id, String location, Date date) {
         this.location = location;
         this.date = date;
+        this.id = id;
     }
 
     public String getLocation() {
@@ -38,12 +47,12 @@ public class Match {
         this.location = location;
     }
 
-    public float getLatidude() {
-        return latidude;
+    public float getlatitude() {
+        return latitude;
     }
 
-    public void setLatidude(float latidude) {
-        this.latidude = latidude;
+    public void setlatitude(float latitude) {
+        this.latitude = latitude;
     }
 
     public float getLongitude() {

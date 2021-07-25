@@ -4,12 +4,20 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
+    private int id;
     private String userName;
     private String password;
     private String firstName;
     private String token;
     private static User instance;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public static User getInstance() {
         if (instance == null) {
@@ -48,5 +56,10 @@ public class User {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    @Override
+    public String toString() {
+        return userName;
     }
 }

@@ -25,6 +25,7 @@
         <activity android:name="com.ifoot.Activities.MainActivity" />
         <activity android:name="com.ifoot.Activities.RegisterActivity" />
         <activity android:name="com.ifoot.Activities.MatchList" />
+        <activity android:name="com.ifoot.Activities.MatchDetail" />
 
         <meta-data
             android:name="preloaded_fonts"
