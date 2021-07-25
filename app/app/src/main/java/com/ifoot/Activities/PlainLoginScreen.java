@@ -35,8 +35,8 @@ public class PlainLoginScreen extends AppCompatActivity {
             public void onClick(View view) {
                 EditText username = findViewById(R.id.usernameField);
                 EditText password = findViewById(R.id.passwordField);
-                String token = new LoginService().startTask(username.getText().toString(), password.getText().toString());
-                if (token != null) {
+                boolean authenticated = new LoginService().startTask(username.getText().toString(), password.getText().toString());
+                if (authenticated) {
                     Intent myIntent = new Intent(view.getContext(), MatchList.class);
                     startActivityForResult(myIntent, 0);
                 }

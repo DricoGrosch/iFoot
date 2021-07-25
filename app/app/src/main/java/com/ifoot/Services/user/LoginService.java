@@ -2,6 +2,8 @@ package com.ifoot.Services.user;
 
 import android.os.AsyncTask;
 
+import com.ifoot.Models.User;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -13,19 +15,18 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoginService {
-    public String startTask(String username, String password) {
+    public boolean startTask(String username, String password) {
         try {
-            return new LoginTask().execute(username,password).get();
+            return new LoginTask().execute(username, password).get();
         } catch (Exception e) {
-            return null;
+            return false;
         }
     }
 
-    class LoginTask extends AsyncTask<String, String, String> {
+    class LoginTask extends AsyncTask<String, String, Boolean> {
 
         @Override
-        protected String doInBackground(String... params) {
-            String token = null;
+        protected Boolean doInBackground(String... params) {
             try {
                 OkHttpClient client = new OkHttpClient.Builder()
                         .retryOnConnectionFailure(true)
@@ -43,17 +44,26 @@ public class LoginService {
                 try {
                     Response response = client.newCall(request).execute();
                     String data = response.body().string();
-                    token = new JSONObject(data).getString("token");
+                    JSONObject json = new JSONObject(data);
+                    String token = json.getString("token");
+                    JSONObject jsonUser = new JSONObject(json.getString("user"));
+                    if (token != null) {
+                        User user = User.getInstance();
+                        user.setToken(token);
+                        user.setFirstName(jsonUser.getString("first_name"));
+                        user.setUserName(jsonUser.getString("username"));
+                        user.setPassword(jsonUser.getString("password"));
+                        return true;
+                    }
+                    return false;
                 } catch (IOException e) {
                     e.printStackTrace();
-                    return null;
+                    return false;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                return token;
-
             }
+            return false;
         }
 
     }

@@ -9,7 +9,7 @@ router.register('user', UserViewSet)
 router.register('match', MatchViewSet)
 urlpatterns = [
     path('', include(router.urls)),
-    path('login', ObtainAuthToken.as_view()),
+    path('login', CustomObtainAuthToken.as_view()),
     path('match/assignment', MatchAssingment.as_view()),
     path('match/unassignment', MatchUnassingment.as_view())
 ]

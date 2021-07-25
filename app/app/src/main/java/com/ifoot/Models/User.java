@@ -4,23 +4,27 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
-    @SerializedName("userName")
-    @Expose
     private String userName;
-    @SerializedName("password")
-    @Expose
     private String password;
-    @SerializedName("first_name")
-    @Expose
     private String firstName;
+    private String token;
+    private static User instance;
 
 
-    public User(String userName, String password, String firstName) {
-        this.userName = userName;
-        this.password = password;
-        this.firstName = firstName;
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User();
+        }
+        return instance;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getUserName() {
         return userName;
