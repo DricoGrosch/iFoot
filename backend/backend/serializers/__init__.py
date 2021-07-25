@@ -1,2 +1,2 @@
 from .user import UserSerializer
-from .match import MatchSerializer
+from .match import MatchSerializer,MatchShortSerializer

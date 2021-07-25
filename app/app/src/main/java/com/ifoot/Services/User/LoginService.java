@@ -1,4 +1,4 @@
-package com.ifoot.Services.user;
+package com.ifoot.Services.User;
 
 import android.os.AsyncTask;
 

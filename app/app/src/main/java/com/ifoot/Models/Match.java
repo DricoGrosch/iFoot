@@ -3,32 +3,22 @@ package com.ifoot.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Time;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Match {
-    @SerializedName("location")
-    @Expose
     private String location;
-    @SerializedName("latidude")
-    @Expose
     private float latidude;
-    @SerializedName("longitude")
-    @Expose
     private float longitude;
-    @SerializedName("date")
-    @Expose
-    private DateTimeFormatter date;
-    @SerializedName("users")
-    @Expose
+    private Date date;
     private ArrayList<User> users;
 
 
-    public Match(String location, float latidude, float longitude, DateTimeFormatter date) {
+    public Match(String location, Date date) {
         this.location = location;
-        this.latidude = latidude;
-        this.longitude = longitude;
         this.date = date;
     }
 
@@ -64,11 +54,11 @@ public class Match {
         this.longitude = longitude;
     }
 
-    public DateTimeFormatter getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(DateTimeFormatter date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -80,5 +70,10 @@ public class Match {
         this.users = users;
     }
 
-
+    @Override
+    public String toString() {
+        return location + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }

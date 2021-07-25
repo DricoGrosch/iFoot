@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 
 import com.ifoot.R;
-import com.ifoot.Services.user.LoginService;
+import com.ifoot.Services.User.LoginService;
 
 
 public class PlainLoginScreen extends AppCompatActivity {

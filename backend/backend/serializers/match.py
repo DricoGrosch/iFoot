@@ -12,3 +12,9 @@ class MatchSerializer(ModelSerializer):
     class Meta:
         model = Match
         fields = '__all__'
+
+
+class MatchShortSerializer(ModelSerializer):
+    class Meta:
+        model = Match
+        fields = ['id','location', 'date']

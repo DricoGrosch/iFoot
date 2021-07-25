@@ -7,25 +7,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
+import com.ifoot.Models.Match;
 import com.ifoot.R;
+import com.ifoot.Services.Match.FecthAll;
 
 import java.util.ArrayList;
 
 
 public class MatchList extends AppCompatActivity {
-    ListView listView;
-
-    ArrayList<String> array = new ArrayList<String>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        array.add("1");
-        array.add("2");
         super.onCreate(savedInstanceState);
+        ArrayList<String> stringMatches = new ArrayList<>();
+        for (Match m : new FecthAll().startTask()) {
+            stringMatches.add(m.toString());
+        }
         setContentView(R.layout.activity_match_list);
-        listView = findViewById(R.id.listView);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, array);
+        ListView listView = findViewById(R.id.listView);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, stringMatches);
         listView.setAdapter(adapter);
     }
 }
