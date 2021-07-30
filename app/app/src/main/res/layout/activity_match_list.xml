@@ -69,7 +69,8 @@
         android:layout_marginLeft="4dp"
         android:layout_marginTop="204dp"
         android:background="@color/colorAccent"
-        android:text="NEW MATCH"
+        android:text="Nova Partida"
+        android:textColor="@color/design_default_color_on_primary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
