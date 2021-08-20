@@ -25,6 +25,7 @@ public class Subscribe {
         @Override
         protected Boolean doInBackground(Integer... params) {
             try {
+                User user = User.getInstance();
 
                 OkHttpClient client = new OkHttpClient.Builder()
                         .retryOnConnectionFailure(true)
@@ -35,6 +36,7 @@ public class Subscribe {
                         .build();
                 Request request = new Request.Builder()
                         .url("http://10.0.2.2/api/match/subscribe")
+                        .addHeader("Authorization", "token " + user.getToken())
                         .post(formBody)
                         .build();
                 Response response = client.newCall(request).execute();

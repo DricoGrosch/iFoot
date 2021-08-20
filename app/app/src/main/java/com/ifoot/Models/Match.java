@@ -29,6 +29,7 @@ public class Match {
         this.location = location;
         this.date = date;
         this.id = id;
+        this.users = new ArrayList<>();
     }
 
     public String getLocation() {
@@ -36,6 +37,9 @@ public class Match {
     }
 
     public void addUser(User user) {
+        if (this.users==null){
+            this.users = new ArrayList<>();
+        }
         this.users.add(user);
     }
 

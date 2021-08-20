@@ -47,13 +47,15 @@ public class GetOne {
 
                 Response response = client.newCall(request).execute();
                 JSONObject json = new JSONObject(response.body().string());
-                match = gson.fromJson(json.toString(), Match.class);
                 JSONArray users = json.getJSONArray("users");
+                json.remove("users");
+                match = gson.fromJson(json.toString(), Match.class);
                 for (int i = 0; i < users.length(); i++) {
                     JSONObject jsonUser = users.getJSONObject(i);
                     User matchUser = gson.fromJson(json.toString(), User.class);
                     String username = jsonUser.getString("username");
                     matchUser.setUserName(username);
+                    matchUser.setId(jsonUser.getInt("id"));
                     match.addUser(matchUser);
                 }
                 return match;
