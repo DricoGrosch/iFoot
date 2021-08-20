@@ -83,19 +83,9 @@
             android:orientation="vertical">
 
 
-            <EditText
-                android:id="@+id/editText_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:fontFamily="@font/montserrat"
-                android:hint="Nome completo"
-                android:inputType="textPersonName"
-                android:padding="12dp" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/usernameRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -106,25 +96,25 @@
                 android:padding="12dp" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/password1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:fontFamily="@font/montserrat"
                 android:hint="Senha"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:padding="12dp" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/password2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:fontFamily="@font/montserrat"
                 android:hint="Confirmar senha"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:padding="12dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
