@@ -50,6 +50,7 @@ public class GetOne {
                 JSONArray users = json.getJSONArray("users");
                 json.remove("users");
                 match = gson.fromJson(json.toString(), Match.class);
+                match.setUsers(new ArrayList<>());
                 for (int i = 0; i < users.length(); i++) {
                     JSONObject jsonUser = users.getJSONObject(i);
                     User matchUser = gson.fromJson(json.toString(), User.class);
