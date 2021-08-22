@@ -11,10 +11,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ifoot.Models.Match;
@@ -122,8 +124,9 @@ public class MatchDetail extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        LatLng position = new LatLng(this.match.getlatitude(), this.match.getlatitude());
+        LatLng position = new LatLng(this.match.getlatitude(), this.match.getLongitude());
         this.map = googleMap;
+        this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 10));
         this.map.addMarker(new MarkerOptions().position(position));
     }
 }
