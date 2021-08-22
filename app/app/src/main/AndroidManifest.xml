@@ -26,9 +26,12 @@
         <activity android:name="com.ifoot.Activities.RegisterActivity" />
         <activity android:name="com.ifoot.Activities.MatchList" />
         <activity android:name="com.ifoot.Activities.MatchDetail" />
+        <activity android:name="com.ifoot.Activities.MatchCreation" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCd--oUDZ1E5BmOMhT2dbLIMlAQmQ_WydY" />
     </application>
 </manifest>

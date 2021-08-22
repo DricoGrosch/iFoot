@@ -12,9 +12,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class Create {
-    public boolean startTask(String location, String date) {
+    public boolean startTask(String location, String date, String latitude, String longitude) {
         try {
-            return new CreateTask().execute(location, date).get();
+            return new CreateTask().execute(location, date, latitude, longitude).get();
         } catch (Exception e) {
             return false;
         }
@@ -35,6 +35,8 @@ public class Create {
                 RequestBody formBody = new FormBody.Builder()
                         .add("location", params[0])
                         .add("date", params[1])
+                        .add("latitude", params[2])
+                        .add("longitude", params[3])
                         .build();
                 Request request = new Request.Builder()
                         .url("http://10.0.2.2/api/match/")

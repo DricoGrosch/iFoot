@@ -7,52 +7,11 @@
     android:background="@drawable/gradient"
     tools:context="Activities.MatchList">
 
-    <EditText
-        android:id="@+id/newMatchTimeInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:fontFamily="@font/montserrat"
-        android:hint="Horário da partida"
-        android:inputType="textPersonName"
-        android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/newMatchDateInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:fontFamily="@font/montserrat"
-        android:hint="Data da partida"
-        android:inputType="textPersonName"
-        android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/newMatchLocationInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:ems="10"
-        android:fontFamily="@font/montserrat"
-        android:hint="Local da Partida"
-        android:inputType="textPersonName"
-        android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/newMatchButton">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ListView
             android:id="@+id/listView"
@@ -61,15 +20,14 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/newMatchButton"
-        android:layout_width="397dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="204dp"
-        android:background="@color/colorAccent"
-        android:text="Nova Partida"
-        android:textColor="@color/design_default_color_on_primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/createMatchTargetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginLeft="161dp"
+        android:layout_marginBottom="59dp"
+        android:text="nova"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

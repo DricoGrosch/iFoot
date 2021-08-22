@@ -26,35 +26,6 @@ import java.util.Date;
 
 
 public class MatchList extends AppCompatActivity {
-    EditText date;
-    EditText time;
-
-    public void transformInputs() {
-        this.date = findViewById(R.id.newMatchDateInput);
-        this.time = findViewById(R.id.newMatchTimeInput);
-
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDateDialog(view, date);
-            }
-        });
-    }
-
-    private void showDateDialog(View view, EditText date) {
-        Calendar calendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                calendar.set(Calendar.YEAR, i);
-                calendar.set(Calendar.MONTH, i1);
-                calendar.set(Calendar.DAY_OF_MONTH, i2);
-                SimpleDateFormat matchDate = new SimpleDateFormat("yyyy-MM-dd");
-                date.setText(matchDate.format(calendar));
-            }
-        };
-        new DatePickerDialog(view.getContext(), dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +35,6 @@ public class MatchList extends AppCompatActivity {
         ListView listView = findViewById(R.id.listView);
         ArrayAdapter<Match> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, matches);
         listView.setAdapter(adapter);
-        this.transformInputs();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,13 +45,11 @@ public class MatchList extends AppCompatActivity {
             }
         });
 
-        Button newMatchButton = (Button) findViewById(R.id.newMatchButton);
-        newMatchButton.setOnClickListener(new View.OnClickListener() {
+        Button target = (Button) findViewById(R.id.createMatchTargetButton);
+        target.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                EditText location = findViewById(R.id.newMatchLocationInput);
-                new Create().startTask(location.getText().toString(), date.getText() + " " + time.getText());
-                finish();
-                startActivity(getIntent());
+                Intent intent = new Intent(view.getContext(), MatchCreation.class);
+                startActivityForResult(intent, 0);
             }
 
         });
