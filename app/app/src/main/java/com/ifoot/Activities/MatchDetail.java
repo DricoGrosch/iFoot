@@ -28,8 +28,6 @@ public class MatchDetail extends AppCompatActivity implements OnMapReadyCallback
     Match match;
     MapView mapView;
     GoogleMap map;
-    double latitude;
-    double longitude;
 
     private void handleButtons() {
         Button subscribe = (Button) findViewById(R.id.subscribeButton);
@@ -62,11 +60,13 @@ public class MatchDetail extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-//        this.mapView = findViewById(R.id.mapDetail);
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
-        this.match = new GetOne().startTask(extras.getInt("id"));
         setContentView(R.layout.activity_match_detail);
+        Bundle extras = getIntent().getExtras();
+        this.mapView = findViewById(R.id.mapView);
+        this.mapView.getMapAsync(this);
+        this.mapView.onCreate(savedInstanceState);
+        this.match = new GetOne().startTask(extras.getInt("id"));
         TextView title = findViewById(R.id.matchLocation);
         TextView subTitle = findViewById(R.id.matchDate);
         title.setText(match.getLocation());
@@ -122,6 +122,8 @@ public class MatchDetail extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        this.map.addMarker(new MarkerOptions().position(new LatLng(this.match.getlatitude(), this.match.getlatitude())));
+        LatLng position = new LatLng(this.match.getlatitude(), this.match.getlatitude());
+        this.map = googleMap;
+        this.map.addMarker(new MarkerOptions().position(position));
     }
 }
