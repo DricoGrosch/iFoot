@@ -25,14 +25,13 @@ import java.util.Calendar;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    private DatePickerDialog datePickerDialog;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        initDatePicker();
         setContentView(R.layout.activity_register);
 
 
@@ -44,39 +43,15 @@ public class RegisterActivity extends AppCompatActivity {
                 EditText password2 = findViewById(R.id.password2);
                 if (!password1.getText().equals(password2.getText())) {
                     boolean created = new Register().startTask(username.getText().toString(), password1.getText().toString());
-                    //Intent myIntent = new Intent(view.getContext(), PlainLoginScreen.class);
-                    //startActivityForResult(myIntent, 0);
-                    openDatePicker( this);
+                    Intent myIntent = new Intent(view.getContext(), PlainLoginScreen.class);
+                    startActivityForResult(myIntent, 0);
                 }
             }
 
         });
 
     }
-    private void initDatePicker(){
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener(){
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month+1;
-                String date = makeDateString(day,month,year);
 
-            }
-        };
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-
-        int style = AlertDialog.THEME_HOLO_LIGHT;
-        datePickerDialog = new DatePickerDialog(this,style,dateSetListener,year,month,day);
-    }
-    private String makeDateString(int day, int month, int year){
-        return month+ "" + day+ "year";
-    }
-
-public void openDatePicker(View.OnClickListener view){
-        datePickerDialog.show();
-}
 
     public void onLogin(View view) {
         finish();
