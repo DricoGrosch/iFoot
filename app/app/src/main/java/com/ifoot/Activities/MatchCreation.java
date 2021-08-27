@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -105,6 +106,16 @@ public class MatchCreation extends AppCompatActivity implements OnMapReadyCallba
         this.dateInput = findViewById(R.id.newMatchDateInput);
         this.timeInput = findViewById(R.id.newMatchTimeInput);
         this.locationInput = findViewById(R.id.newMatchLocationInput);
+
+
+
+        this.dateInput.setTextColor(Color.WHITE);
+        this.timeInput.setTextColor(Color.WHITE);
+        this.locationInput.setTextColor(Color.WHITE);
+
+        this.dateInput.setHintTextColor(Color.WHITE);
+        this.timeInput.setHintTextColor(Color.WHITE);
+        this.locationInput.setHintTextColor(Color.WHITE);
         dateInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
