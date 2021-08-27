@@ -2,6 +2,7 @@ package com.ifoot.Activities;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.ifoot.R;
 import com.ifoot.Services.Match.Create;
 
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,6 +36,7 @@ public class MatchCreation extends AppCompatActivity implements OnMapReadyCallba
     EditText timeInput;
     EditText locationInput;
     private DatePickerDialog datePickerDialog;
+    private TimePickerDialog timePickerDialog;
     MapView mapView;
     GoogleMap map;
     double latitude;
@@ -48,9 +52,7 @@ public class MatchCreation extends AppCompatActivity implements OnMapReadyCallba
                 try {
                     date = new SimpleDateFormat("yyyy-M-dd").parse(year + "-" + month + "-" + day);
                     dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-                    String a = dateFormat.format(date);
-                    dateInput.setText(a);
+                    dateInput.setText(dateFormat.format(date));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -68,6 +70,28 @@ public class MatchCreation extends AppCompatActivity implements OnMapReadyCallba
 
     public void initPickers() {
         initDatePicker();
+        initTimePicker();
+    }
+
+    private void initTimePicker() {
+        Calendar cal = Calendar.getInstance();
+        this.timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+                Date date = null;
+                try {
+                    date = sdf.parse(i + ":" + i1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                String formattedTime = sdf.format(date);
+
+                timeInput.setText(formattedTime);
+
+
+            }
+        }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true);
     }
 
     @Override
@@ -87,7 +111,12 @@ public class MatchCreation extends AppCompatActivity implements OnMapReadyCallba
                 datePickerDialog.show();
             }
         });
-
+        timeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timePickerDialog.show();
+            }
+        });
 
         Button newMatchButton = (Button) findViewById(R.id.newMatchButton);
         newMatchButton.setOnClickListener(new View.OnClickListener() {

@@ -126,7 +126,7 @@ public class MatchDetail extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(@NonNull GoogleMap googleMap) {
         LatLng position = new LatLng(this.match.getlatitude(), this.match.getLongitude());
         this.map = googleMap;
-        this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 10));
+        this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 5));
         this.map.addMarker(new MarkerOptions().position(position));
     }
 }
