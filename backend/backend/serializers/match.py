@@ -1,5 +1,3 @@
-from django.contrib.auth.models import User
-from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import ModelSerializer
 
 from backend.models import Match
@@ -17,4 +15,4 @@ class MatchSerializer(ModelSerializer):
 class MatchShortSerializer(ModelSerializer):
     class Meta:
         model = Match
-        fields = ['id','location', 'date']
+        fields = ['id', 'location', 'date', 'number_of_members', 'sport']

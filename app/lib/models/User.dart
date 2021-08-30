@@ -4,13 +4,19 @@ class User {
   static User appUser;
   static User getAppUser() {
     if (appUser == null) {
-      appUser = new User(null, null, null, null, null, null, null);
+      appUser = new User();
     }
     return appUser;
   }
 
-  User(this.token, this.id, this.email, this.password, this.firstName,
-      this.lastName, this.username);
+  User(
+      [this.token,
+      this.id,
+      this.email,
+      this.password,
+      this.firstName,
+      this.lastName,
+      this.username]);
 
   static User fromJson(Map<String, dynamic> json) {
     User user = new User(
