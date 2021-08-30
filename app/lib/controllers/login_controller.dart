@@ -13,7 +13,9 @@ class LoginController {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(
             {'username': userData.username, 'password': userData.password}));
-
+    if (response.statusCode != 200) {
+      return false;
+    }
     User.appUser = User.fromJson(jsonDecode(response.body));
     return true;
   }

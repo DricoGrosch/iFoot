@@ -1,5 +1,6 @@
 import 'package:app/controllers/login_controller.dart';
 import 'package:app/models/User.dart';
+import 'package:app/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   User user = User.getAppUser();
-  bool showErrors = false;
   LoginController loginController = new LoginController();
 
   @override
@@ -34,7 +34,6 @@ class _LoginPageState extends State<LoginPage> {
                         {setState(() => user.username = value)},
                     decoration: InputDecoration(
                       hintText: 'Username',
-                      errorText: showErrors ? 'Este campo é obrigatório' : null,
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       border: OutlineInputBorder(
@@ -48,7 +47,6 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: 'Password',
-                      errorText: showErrors ? 'Este campo é obrigatório' : null,
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       border: OutlineInputBorder(
@@ -57,26 +55,38 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 24.0),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: ElevatedButton(
-                      onPressed: () async => {
-                        if (!await loginController.handleLogin(user))
-                          {
-                            setState(() => {showErrors = true})
-                          }
-                        else
-                          {
-                            setState(() => {showErrors = false})
-                            // Navigator.push(context, route)
-                          }
-                      },
-                      child:
-                          Text('LOGIN', style: TextStyle(color: Colors.white)),
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style:
+                              ElevatedButton.styleFrom(primary: Colors.black),
+                          onPressed: () async => {
+                            if (!await loginController.handleLogin(user))
+                              {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text('Credenciais inválidas')))
+                              }
+                            else
+                              {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()))
+                              }
+                          },
+                          child: Text('LOGIN',
+                              style: TextStyle(color: Colors.white)),
+                        ),
+                      ),
                     ),
                   ),
                   TextButton(
                     child: Text(
-                      'Forgot password?',
+                      'Esqueceu sua senha ?',
                       style: TextStyle(color: Colors.black54),
                     ),
                     onPressed: () {},

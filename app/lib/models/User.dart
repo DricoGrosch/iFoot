@@ -2,7 +2,7 @@ class User {
   int id;
   String email, password, token, firstName, lastName, username;
   static User appUser;
-  static getAppUser() {
+  static User getAppUser() {
     if (appUser == null) {
       appUser = new User(null, null, null, null, null, null, null);
     }

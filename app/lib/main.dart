@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'IFoot',
-      theme: ThemeData(primarySwatch: Colors.grey),
+      theme: ThemeData(primaryColor: Colors.black),
       home: LoginPage(),
     );
   }
