@@ -22,30 +22,42 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bem vindo ${User.getAppUser().username}'),
-        automaticallyImplyLeading: false,
-      ),
-      body: screens[index],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
-        backgroundColor: Colors.black,
-        child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: index,
-        onTap: (i) => {
-          setState(() => {index = i})
-        },
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.supervised_user_circle),
-              label: 'Minhas partidas'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_search), label: 'Outras partidas'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: Text('Bem vindo ${User.getAppUser().username}'),
+          // automaticallyImplyLeading: false,
+        ),
+        body: screens[index],
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              UserAccountsDrawerHeader(
+                  currentAccountPicture: FlutterLogo(),
+                  accountName: Text(User.getAppUser().username),
+                  accountEmail: Text('')),
+              ListTile(
+                title: const Text('Minhas partidas'),
+                onTap: () {
+                  Navigator.pop(context);
+                  setState(() => {index = 0});
+                },
+              ),
+              ListTile(
+                title: const Text('Outras partidas'),
+                onTap: () {
+                  Navigator.pop(context);
+                  setState(() => {index = 1});
+                },
+              ),
+              ListTile(
+                title: const Text('Meus Grupos'),
+                onTap: () {
+                  Navigator.pop(context);
+                  setState(() => {index = 2});
+                },
+              ),
+            ],
+          ),
+        ));
   }
 }

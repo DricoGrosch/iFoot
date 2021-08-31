@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 class Match {
   int id;
   String location, latitude, longitude, lastName, username;
+  bool public;
   DateTime date;
   List<User> users;
   Match(
@@ -14,6 +15,7 @@ class Match {
       this.lastName,
       this.username,
       this.date,
+      this.public = false,
       this.users]);
   Image getIcon() {
     return Image.asset('assets/images/soccer.png');

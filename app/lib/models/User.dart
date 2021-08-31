@@ -1,7 +1,11 @@
+import 'package:app/models/group.dart';
+
 class User {
   int id;
   String email, password, token, firstName, lastName, username;
   static User appUser;
+  List<Group> groups;
+
   static User getAppUser() {
     if (appUser == null) {
       appUser = new User();
@@ -27,6 +31,8 @@ class User {
         json['user']['first_name'],
         json['user']['last_name'],
         json['user']['username']);
+    // user.groups =
+    // json['groups'].map((jsonGroup) => new Group(name: jsonGroup['name']));
     return user;
   }
 }
