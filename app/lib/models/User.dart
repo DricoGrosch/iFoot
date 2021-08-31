@@ -31,8 +31,9 @@ class User {
         json['user']['first_name'],
         json['user']['last_name'],
         json['user']['username']);
-    // user.groups =
-    // json['groups'].map((jsonGroup) => new Group(name: jsonGroup['name']));
+    user.groups = json['user']['groups']
+        .map<Group>((jsonGroup) => new Group(name: jsonGroup['name']))
+        .toList();
     return user;
   }
 }

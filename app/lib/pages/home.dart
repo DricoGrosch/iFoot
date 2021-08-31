@@ -1,4 +1,6 @@
 import 'package:app/models/User.dart';
+import 'package:app/models/group.dart';
+import 'package:app/pages/group_list.dart';
 import 'package:app/pages/my_matches_list.dart';
 import 'package:app/pages/other_matches_list.dart';
 import 'package:app/pages/profile.dart';
@@ -12,11 +14,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int index = 0;
+  int index = 1;
   List screens = [
+    Profile(),
     MyMatchesList(),
     OtherMatchesList(),
-    Profile(),
+    GroupList(),
   ];
 
   @override
@@ -39,21 +42,21 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('Minhas partidas'),
                 onTap: () {
                   Navigator.pop(context);
-                  setState(() => {index = 0});
+                  setState(() => {index = 1});
                 },
               ),
               ListTile(
                 title: const Text('Outras partidas'),
                 onTap: () {
                   Navigator.pop(context);
-                  setState(() => {index = 1});
+                  setState(() => {index = 2});
                 },
               ),
               ListTile(
                 title: const Text('Meus Grupos'),
                 onTap: () {
                   Navigator.pop(context);
-                  setState(() => {index = 2});
+                  setState(() => {index = 3});
                 },
               ),
             ],

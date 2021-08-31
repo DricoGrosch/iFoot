@@ -13,11 +13,13 @@ class CustomObtainAuthToken(ObtainAuthToken):
             serializer.is_valid(raise_exception=True)
             user = serializer.validated_data['user']
             token, created = Token.objects.get_or_create(user=user)
-            return Response({
+            a = Response({
                 'token': token.key,
                 'user': {
                     **UserSerializer(user).data
                 }
             })
-        except:
+            return a
+        except Exception as e:
+            print(e)
             return Response({'token': None}, status=HTTP_401_UNAUTHORIZED)
