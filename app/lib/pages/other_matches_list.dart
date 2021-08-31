@@ -16,9 +16,17 @@ class _OtherMatchesListState extends State<OtherMatchesList> {
         future: MatchController.fetchMatches(onlyMines: false),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Column(children: [
-              for (var match in snapshot.data) Text(match['location'])
-            ]);
+            return ListView(
+                children: snapshot.data.map<Widget>((match) {
+              return Card(
+                child: ListTile(
+                  leading: FlutterLogo(size: 56.0),
+                  title: Text(match['location']),
+                  subtitle: Text(match['date']),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              );
+            }).toList());
           } else {
             return CircularProgressIndicator();
           }
