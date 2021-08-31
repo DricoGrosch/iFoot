@@ -22,4 +22,4 @@ class CustomObtainAuthToken(ObtainAuthToken):
             return a
         except Exception as e:
             print(e)
-            return Response({'token': None}, status=HTTP_401_UNAUTHORIZED)
+            return Response({'error': 'Credenciais inválidas'}, status=HTTP_401_UNAUTHORIZED)
