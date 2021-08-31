@@ -23,11 +23,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Form(
               child: Column(
                 children: [
-                  Icon(
-                    Icons.sports_soccer_outlined,
-                    color: Colors.blue,
-                    size: 130,
-                  ),
+                  Image.asset('assets/images/logo.png'),
                   SizedBox(height: 48.0),
                   TextFormField(
                     onChanged: (value) =>

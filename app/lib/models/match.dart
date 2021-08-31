@@ -1,4 +1,5 @@
 import 'package:app/models/User.dart';
+import 'package:flutter/cupertino.dart';
 
 class Match {
   int id;
@@ -12,13 +13,20 @@ class Match {
       this.longitude,
       this.lastName,
       this.username,
+      this.date,
       this.users]);
+  Image getIcon() {
+    return Image.asset('assets/images/soccer.png');
+  }
 
   static Match fromJson(Map<String, dynamic> json) {
     Match match = new Match(json['id'], json['location'], json['latitude'],
-        json['longitude'], json['lastName'], json['username'], []);
-    json['users'].forEach(
-        (Map<String, dynamic> user) => {match.users.add(User.fromJson(user))});
+        json['longitude'], json['lastName'], json['username']);
+    match.date = DateTime.parse(json['date']);
+    if (json.containsKey('users')) {
+      json['users'].forEach((Map<String, dynamic> user) =>
+          {match.users.add(User.fromJson(user))});
+    }
     return match;
   }
 }

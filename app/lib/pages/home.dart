@@ -27,7 +27,13 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
       ),
       body: screens[index],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        backgroundColor: Colors.black,
+        child: Icon(Icons.add),
+      ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: index,
         onTap: (i) => {
           setState(() => {index = i})
         },
