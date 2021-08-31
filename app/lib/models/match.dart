@@ -22,9 +22,15 @@ class Match {
   }
 
   static Match fromJson(Map<String, dynamic> json) {
-    Match match = new Match(json['id'], json['location'], json['latitude'],
-        json['longitude'], json['lastName'], json['username']);
-    match.date = DateTime.parse(json['date']);
+    Match match = new Match(
+        json['id'],
+        json['location'],
+        json['latitude'],
+        json['longitude'],
+        json['lastName'],
+        json['username'],
+        DateTime.parse(json['date']));
+
     if (json.containsKey('users')) {
       json['users'].forEach((Map<String, dynamic> user) =>
           {match.users.add(User.fromJson(user))});

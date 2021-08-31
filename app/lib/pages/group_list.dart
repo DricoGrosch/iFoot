@@ -1,6 +1,4 @@
-import 'package:app/controllers/match_controller.dart';
 import 'package:app/models/User.dart';
-import 'package:app/widgets/match_list_item.dart';
 import 'package:flutter/material.dart';
 
 class GroupList extends StatelessWidget {

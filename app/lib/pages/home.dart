@@ -1,5 +1,4 @@
 import 'package:app/models/User.dart';
-import 'package:app/models/group.dart';
 import 'package:app/pages/group_list.dart';
 import 'package:app/pages/my_matches_list.dart';
 import 'package:app/pages/other_matches_list.dart';

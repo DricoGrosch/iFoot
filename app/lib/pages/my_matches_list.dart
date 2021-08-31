@@ -1,9 +1,9 @@
 import 'package:app/controllers/match_controller.dart';
 import 'package:app/models/match.dart';
+import 'package:app/pages/sport_selector.dart';
 import 'package:app/widgets/match_list_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:app/models/match.dart';
 
 class MyMatchesList extends StatefulWidget {
   const MyMatchesList({Key key}) : super(key: key);
@@ -25,11 +25,14 @@ class _MyMatchesListState extends State<MyMatchesList> {
                 return MatchListItem(match: Match.fromJson(json));
               }).toList());
             } else {
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () => {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SportSelector()))
+        },
         backgroundColor: Colors.black,
         child: Icon(Icons.add),
       ),
