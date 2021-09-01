@@ -10,8 +10,8 @@ router.register('match', MatchViewSet)
 router.register('group', GroupViewSet)
 urlpatterns = [
     path('', include(router.urls)),
-    path('login', CustomObtainAuthToken.as_view()),
-    path('match/subscribe', MatchSubscribe.as_view()),
-    path('match/unsubscribe', MatchUnsubscribe.as_view()),
-    path('user/register',  UserRegisterAPIView.as_view())
+    path('login/', CustomObtainAuthToken.as_view()),
+    path('match/subscribe/', MatchSubscribe.as_view()),
+    path('match/unsubscribe/', MatchUnsubscribe.as_view()),
+    path('user/register/',  UserRegisterAPIView.as_view())
 ]

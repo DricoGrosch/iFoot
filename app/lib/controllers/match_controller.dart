@@ -1,19 +1,13 @@
-import 'dart:convert';
-
-import 'package:app/models/User.dart';
-import 'package:app/settings.dart';
-import 'package:http/http.dart' as http;
+import 'package:app/api/routes.dart';
+import 'package:app/api/services.dart';
 
 class MatchController {
-  static fetchMatches({bool onlyMines = true}) async {
-    var response = await http.get(
-        onlyMines
-            ? '$SERVER_HOST/api/match'
-            : '$SERVER_HOST/api/match?other=true',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'token ${User.getAppUser().token}'
-        });
-    return jsonDecode(response.body);
+  static fetchMatches({Map<String, dynamic> filters}) async {
+    try {
+      var response = await Services.get(Routes.MATCH, filters);
+      return response;
+    } catch (e) {
+      return [];
+    }
   }
 }

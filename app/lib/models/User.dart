@@ -14,13 +14,13 @@ class User {
   }
 
   User(
-      [this.token,
+      [this.token = '',
       this.id,
-      this.email,
-      this.password,
-      this.firstName,
-      this.lastName,
-      this.username]);
+      this.email = '',
+      this.password = '',
+      this.firstName = '',
+      this.lastName = '',
+      this.username = '']);
 
   static User fromJson(Map<String, dynamic> json) {
     User user = new User(

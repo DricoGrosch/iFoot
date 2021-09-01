@@ -17,7 +17,7 @@ class _MyMatchesListState extends State<MyMatchesList> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-          future: MatchController.fetchMatches(onlyMines: false),
+          future: MatchController.fetchMatches(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(

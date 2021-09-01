@@ -17,7 +17,7 @@ class _OtherMatchesListState extends State<OtherMatchesList> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-          future: MatchController.fetchMatches(),
+          future: MatchController.fetchMatches(filters: {'other': 'true'}),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(
