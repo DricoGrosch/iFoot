@@ -1,6 +1,6 @@
 import 'package:app/controllers/match_controller.dart';
 import 'package:app/models/match.dart';
-import 'package:app/pages/sport_selector.dart';
+import 'package:app/pages/match_creation.dart';
 import 'package:app/widgets/match_list_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class _OtherMatchesListState extends State<OtherMatchesList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SportSelector()))
+              context, MaterialPageRoute(builder: (context) => MatchCreation()))
         },
         backgroundColor: Colors.black,
         child: Icon(Icons.add),

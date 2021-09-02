@@ -5,6 +5,7 @@ class Match {
   int id;
   String location, latitude, longitude, lastName, username;
   bool public;
+  Map<String, dynamic> sport;
   DateTime date;
   List<User> users;
   Match(
