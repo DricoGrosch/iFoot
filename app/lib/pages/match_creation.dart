@@ -1,9 +1,8 @@
 import 'package:app/models/match.dart';
+import 'package:app/pages/map_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
 
 class MatchCreation extends StatefulWidget {
   const MatchCreation({Key key}) : super(key: key);
@@ -14,7 +13,6 @@ class MatchCreation extends StatefulWidget {
 
 class _MatchCreationState extends State<MatchCreation> {
   Match match = new Match(date: DateTime.now());
-  Completer<GoogleMapController> _controller = Completer();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -118,18 +116,15 @@ class _MatchCreationState extends State<MatchCreation> {
                         borderRadius: BorderRadius.circular(32.0)),
                   ),
                 ),
-                GoogleMap(
-                  mapType: MapType.hybrid,
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(37.42796133580664, -122.085749655962),
-                    zoom: 14.4746,
-                  ),
-                  onMapCreated: (GoogleMapController controller) {
-                    _controller.complete(controller);
-                  },
-                ),
               ],
             )))),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MapViewer()))
+        },
+        child: Icon(Icons.arrow_right),
       ),
     );
   }
