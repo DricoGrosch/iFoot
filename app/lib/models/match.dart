@@ -8,7 +8,7 @@ class Match {
   DateTime date;
   List<User> users;
   Match(
-      [this.id,
+      {this.id,
       this.location,
       this.latitude,
       this.longitude,
@@ -16,20 +16,18 @@ class Match {
       this.username,
       this.date,
       this.public = false,
-      this.users]);
+      this.users});
   Image getIcon() {
     return Image.asset('assets/images/soccer.png');
   }
 
   static Match fromJson(Map<String, dynamic> json) {
     Match match = new Match(
-        json['id'],
-        json['location'],
-        json['latitude'],
-        json['longitude'],
-        json['lastName'],
-        json['username'],
-        DateTime.parse(json['date']));
+        id: json['id'],
+        location: json['location'],
+        latitude: json['latitude'],
+        longitude: json['longitude'],
+        date: DateTime.parse(json['date']));
 
     if (json.containsKey('users')) {
       json['users'].forEach((Map<String, dynamic> user) =>
