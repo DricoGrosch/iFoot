@@ -3,17 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MatchCreationStep3 extends StatefulWidget {
+class MatchCreationStep3 extends StatelessWidget {
   final Match match;
-  const MatchCreationStep3(this.match, {Key key}) : super(key: key);
-
-  @override
-  _MatchCreationStep3State createState() => _MatchCreationStep3State(match);
-}
-
-class _MatchCreationStep3State extends State<MatchCreationStep3> {
-  final Match match;
-  _MatchCreationStep3State(this.match);
+  final Function setState;
+  const MatchCreationStep3(this.match, this.setState, {Key key})
+      : super(key: key);
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(

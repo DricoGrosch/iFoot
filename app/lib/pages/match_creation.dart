@@ -15,24 +15,36 @@ class MatchCreation extends StatefulWidget {
 class _MatchCreationState extends State<MatchCreation> {
   Match match = new Match(date: DateTime.now());
   int step = 0;
+  bool complete = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('criação de nova partida')),
       body: Center(
-          child: Stepper(
-              type: StepperType.horizontal,
-              currentStep: step,
-              onStepTapped: (_step) => setState(() => step = _step),
-              onStepContinue: () => step < 2 ? setState(() => step += 1) : null,
-              onStepCancel: () => step > 0 ? setState(() => step -= 1) : null,
-              steps: [
-            Step(
-                title: Text('Modalidade'),
-                content: MatchCreationStep1(match, setState)),
-            Step(title: Text('Localização'), content: Text('a')),
-            Step(title: Text('Geral'), content: MatchCreationStep3(match)),
-          ])),
+          child: complete
+              ? Text('cabo')
+              : Stepper(
+                  type: StepperType.horizontal,
+                  currentStep: step,
+                  onStepTapped: (_step) => setState(() => step = _step),
+                  onStepContinue: () => {
+                        step < 2
+                            ? setState(() => step += 1)
+                            : setState(() => complete = true)
+                      },
+                  onStepCancel: () => step > 0
+                      ? setState(() => step -= 1)
+                      : setState(() => complete = false),
+                  steps: [
+                      Step(
+                          title: Text('Modalidade'),
+                          content: MatchCreationStep1(match, setState)),
+                      Step(title: Text('Localização'), content: Text('d')),
+                      Step(
+                          title: Text('Geral'),
+                          content: MatchCreationStep3(match, setState)),
+                    ])),
     );
   }
 }
