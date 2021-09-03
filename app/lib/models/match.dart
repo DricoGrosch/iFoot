@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 
 class Match {
   int id;
-  String location, latitude, longitude;
+  String location;
+  double latitude, longitude;
   bool public;
   Map<String, dynamic> sport;
   DateTime date;

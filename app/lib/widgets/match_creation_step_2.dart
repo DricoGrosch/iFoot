@@ -18,6 +18,19 @@ class _MatchCreationStep2State extends State<MatchCreationStep2> {
   final Function parentSetState;
   _MatchCreationStep2State(this.match, this.parentSetState);
   GoogleMapController mapController;
+  List<Marker> markers = [];
+
+  void handleTap(LatLng latLng) {
+    setState(() => {
+          markers = [],
+          markers.add(
+              Marker(markerId: MarkerId(latLng.toString()), position: latLng)),
+        });
+    parentSetState(() => {
+          match.latitude = latLng.latitude,
+          match.longitude = latLng.longitude,
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +43,8 @@ class _MatchCreationStep2State extends State<MatchCreationStep2> {
           zoom: 11,
         ),
         onMapCreated: (controller) => {mapController = controller},
+        markers: Set.from(markers),
+        onTap: handleTap,
       ),
     );
   }

@@ -16,11 +16,20 @@ class _MatchCreationState extends State<MatchCreation> {
   Match match = new Match(date: DateTime.now());
   int step = 0;
   bool complete = false;
+  getStepState(currentStep) {
+    if (currentStep > step) {
+      return StepState.indexed;
+    } else if (currentStep < step) {
+      return StepState.complete;
+    } else {
+      return StepState.editing;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('criação de nova partida')),
+      appBar: AppBar(title: Text('Criação de nova partida')),
       body: Center(
           child: complete
               ? Text('cabo')
@@ -38,10 +47,15 @@ class _MatchCreationState extends State<MatchCreation> {
                       : setState(() => complete = false),
                   steps: [
                       Step(
+                          state: getStepState(0),
                           title: Text('Modalidade'),
                           content: MatchCreationStep1(match, setState)),
-                      Step(title: Text('Localização'), content: Text('d')),
                       Step(
+                          state: getStepState(1),
+                          title: Text('Localização'),
+                          content: Text('')),
+                      Step(
+                          state: getStepState(2),
                           title: Text('Geral'),
                           content: MatchCreationStep3(match, setState)),
                     ])),
