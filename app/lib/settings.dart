@@ -1,1 +1,1 @@
-const SERVER_HOST = "http://10.0.2.2";
+const SERVER_HOST = "http://192.168.0.115";

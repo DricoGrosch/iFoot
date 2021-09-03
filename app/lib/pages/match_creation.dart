@@ -53,7 +53,7 @@ class _MatchCreationState extends State<MatchCreation> {
                       Step(
                           state: getStepState(1),
                           title: Text('Localização'),
-                          content: Text('')),
+                          content: MatchCreationStep2(match, setState)),
                       Step(
                           state: getStepState(2),
                           title: Text('Geral'),

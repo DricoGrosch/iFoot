@@ -1,5 +1,7 @@
+import 'package:app/controllers/mapController.dart';
 import 'package:app/models/match.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MatchCreationStep2 extends StatefulWidget {
@@ -16,9 +18,11 @@ class MatchCreationStep2 extends StatefulWidget {
 class _MatchCreationStep2State extends State<MatchCreationStep2> {
   final Match match;
   final Function parentSetState;
-  _MatchCreationStep2State(this.match, this.parentSetState);
-  GoogleMapController mapController;
+  GoogleMapController googleMapController;
   List<Marker> markers = [];
+  MapController mapController = new MapController();
+
+  _MatchCreationStep2State(this.match, this.parentSetState);
 
   void handleTap(LatLng latLng) {
     setState(() => {
@@ -34,18 +38,26 @@ class _MatchCreationStep2State extends State<MatchCreationStep2> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height / 2 + 100,
-      child: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: CameraPosition(
-          target: LatLng(37.427, -122.0834),
-          zoom: 11,
-        ),
-        onMapCreated: (controller) => {mapController = controller},
-        markers: Set.from(markers),
-        onTap: handleTap,
-      ),
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator());
+        }
+        return Container(
+          height: MediaQuery.of(context).size.height / 2 + 100,
+          child: GoogleMap(
+            mapType: MapType.hybrid,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(snapshot.data.latitude, snapshot.data.longitude),
+              zoom: 11,
+            ),
+            onMapCreated: (controller) => {googleMapController = controller},
+            markers: Set.from(markers),
+            onTap: handleTap,
+          ),
+        );
+      },
+      future: mapController.fetchCurrentLocation(),
     );
   }
 }
