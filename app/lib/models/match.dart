@@ -1,5 +1,7 @@
 import 'package:app/models/User.dart';
+import 'package:app/models/sport.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 
 class Match {
   int id;
@@ -8,17 +10,20 @@ class Match {
   bool public;
   Map<String, dynamic> sport;
   DateTime date;
-  List<User> users;
+  List<User> users = [];
   Match(
       {this.id,
       this.location,
       this.latitude,
       this.longitude,
       this.date,
+      this.sport,
       this.public = false,
-      this.users});
+      this.users}) {
+    users = [];
+  }
   Image getIcon() {
-    return Image.asset('assets/images/soccer.png');
+    return Image.asset(this.sport['icon']);
   }
 
   static Match fromJson(Map<String, dynamic> json) {
@@ -27,12 +32,29 @@ class Match {
         location: json['location'],
         latitude: json['latitude'],
         longitude: json['longitude'],
+        sport: Sport.get(json['sport']),
+        public: json['public'],
         date: DateTime.parse(json['date']));
 
     if (json.containsKey('users')) {
       json['users'].forEach((Map<String, dynamic> user) =>
           {match.users.add(User.fromJson(user))});
+    } else {
+      match.users = [];
     }
     return match;
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': this.id,
+      'location': this.location,
+      'latitude': this.latitude,
+      'longitude': this.longitude,
+      'date': DateFormat('yyyy-MM-dd').add_Hm().format(this.date),
+      'sport': this.sport['id'],
+      'public': this.public,
+      'users': this.users.map((u) => u.id).toList(),
+    };
   }
 }

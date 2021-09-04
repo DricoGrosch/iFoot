@@ -1,4 +1,6 @@
+import 'package:app/controllers/match_controller.dart';
 import 'package:app/models/match.dart';
+import 'package:app/pages/home.dart';
 import 'package:app/widgets/match_creation_step_1.dart';
 import 'package:app/widgets/match_creation_step_2.dart';
 import 'package:app/widgets/match_creation_step_3.dart';
@@ -16,6 +18,7 @@ class _MatchCreationState extends State<MatchCreation> {
   Match match = new Match(date: DateTime.now());
   int step = 0;
   bool complete = false;
+  MatchController matchController = new MatchController();
   getStepState(currentStep) {
     if (currentStep > step) {
       return StepState.indexed;
@@ -28,11 +31,18 @@ class _MatchCreationState extends State<MatchCreation> {
 
   @override
   Widget build(BuildContext context) {
+    matchController.match = match;
     return Scaffold(
       appBar: AppBar(title: Text('Criação de nova partida')),
       body: Center(
           child: complete
-              ? Text('cabo')
+              ? ElevatedButton(
+                  onPressed: () async => {
+                        await matchController.create(),
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => HomePage()))
+                      },
+                  child: Text('manda mano'))
               : Stepper(
                   type: StepperType.horizontal,
                   currentStep: step,
