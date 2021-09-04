@@ -56,7 +56,7 @@ class Match {
       'date': DateFormat('yyyy-MM-dd').add_Hm().format(this.date),
       'sport': this.sport['id'],
       'public': this.public,
-      'group': this.group,
+      'group': this.group.id,
       'users': this.users.map((u) => u.id).toList(),
     };
   }

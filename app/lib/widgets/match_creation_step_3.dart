@@ -1,3 +1,5 @@
+import 'package:app/models/User.dart';
+import 'package:app/models/group.dart';
 import 'package:app/models/match.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +10,6 @@ class MatchCreationStep3 extends StatelessWidget {
   final Function setState;
   const MatchCreationStep3(this.match, this.setState, {Key key})
       : super(key: key);
-
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         initialDate: DateTime.now(),
@@ -65,6 +66,29 @@ class MatchCreationStep3 extends StatelessWidget {
               ),
             ],
           ))),
+          DropdownButton(
+              value: match.group != null ? match.group.id : '',
+              icon: const Icon(Icons.arrow_downward),
+              iconSize: 24,
+              elevation: 16,
+              style: const TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (id) => {
+                    setState(() => match.group = User.getAppUser()
+                        .groups
+                        .toList()
+                        .firstWhere((g) => g.id == id))
+                  },
+              items: [
+                DropdownMenuItem(value: '', child: Text('Selecione o grupo')),
+                ...User.getAppUser().groups.map<DropdownMenuItem>((group) {
+                  return DropdownMenuItem(
+                      value: group.id, child: Text(group.name));
+                }).toList()
+              ]),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
             child: TextFormField(
