@@ -32,7 +32,8 @@ class User {
         json['user']['last_name'],
         json['user']['username']);
     user.groups = json['user']['groups']
-        .map<Group>((jsonGroup) => new Group(name: jsonGroup['name']))
+        .map<Group>((jsonGroup) =>
+            new Group(id: jsonGroup['id'], name: jsonGroup['name']))
         .toList();
     return user;
   }
