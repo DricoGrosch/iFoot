@@ -1,4 +1,4 @@
-import 'package:app/controllers/login_controller.dart';
+import 'package:app/controllers/user_controller.dart';
 import 'package:app/models/User.dart';
 import 'package:app/pages/home.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,10 +11,11 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   User user = User.getAppUser();
-  LoginController loginController = new LoginController();
+  UserController userController = new UserController();
 
   @override
   Widget build(BuildContext context) {
+    userController.user = user;
     return Scaffold(
         backgroundColor: Colors.white,
         body: Center(
@@ -60,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                           style:
                               ElevatedButton.styleFrom(primary: Colors.black),
                           onPressed: () async => {
-                            if (!await loginController.handleLogin(user))
+                            if (!await userController.handleLogin())
                               {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(

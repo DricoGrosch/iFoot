@@ -1,5 +1,7 @@
+import 'package:app/controllers/user_controller.dart';
 import 'package:app/models/User.dart';
 import 'package:app/pages/group_list.dart';
+import 'package:app/pages/login.dart';
 import 'package:app/pages/my_matches_list.dart';
 import 'package:app/pages/other_matches_list.dart';
 import 'package:app/pages/profile.dart';
@@ -13,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  UserController userController = new UserController(user: User.getAppUser());
   int index = 1;
   List screens = [
     Profile(),
@@ -56,6 +59,15 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   Navigator.pop(context);
                   setState(() => {index = 3});
+                },
+              ),
+              ListTile(
+                title: Text('Sair'),
+                onTap: () async {
+                  await userController.handleLogout();
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (c) => LoginPage()),
+                      (route) => false);
                 },
               ),
             ],

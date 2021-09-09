@@ -14,10 +14,8 @@ class Services {
     return jsonDecode(response.body);
   }
 
-  static Future get(String route, Map<String, dynamic> params) async {
+  static Future get(String route, [Map<String, dynamic> params]) async {
     String query = Uri(queryParameters: params).query;
-    String url = '$SERVER_HOST/api/$route?$query';
-    print(url);
     var response =
         await http.get(Uri.parse('$SERVER_HOST/api/$route?$query'), headers: {
       'Content-Type': 'application/json',

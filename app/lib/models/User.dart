@@ -24,14 +24,14 @@ class User {
 
   static User fromJson(Map<String, dynamic> json) {
     User user = new User(
-        json['token'],
-        json['user']['id'],
-        json['user']['email'],
-        json['user']['password'],
-        json['user']['first_name'],
-        json['user']['last_name'],
-        json['user']['username']);
-    user.groups = json['user']['groups']
+        json['token'] ?? '',
+        json['id'] ?? '',
+        json['email'] ?? '',
+        json['password'] ?? '',
+        json['first_name'] ?? '',
+        json['last_name'] ?? '',
+        json['username'] ?? '');
+    user.groups = json['groups']
         .map<Group>((jsonGroup) =>
             new Group(id: jsonGroup['id'], name: jsonGroup['name']))
         .toList();
