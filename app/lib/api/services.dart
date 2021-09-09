@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class Services {
   static Future post(String route, Map<String, dynamic> body) async {
-    var response = await http.post('$SERVER_HOST/api/$route',
+    var response = await http.post(Uri.parse('$SERVER_HOST/api/$route'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'token ${User.getAppUser().token}'
@@ -18,7 +18,8 @@ class Services {
     String query = Uri(queryParameters: params).query;
     String url = '$SERVER_HOST/api/$route?$query';
     print(url);
-    var response = await http.get('$SERVER_HOST/api/$route?$query', headers: {
+    var response =
+        await http.get(Uri.parse('$SERVER_HOST/api/$route?$query'), headers: {
       'Content-Type': 'application/json',
       'Authorization': 'token ${User.getAppUser().token}'
     });

@@ -47,6 +47,7 @@ class _MatchCreationState extends State<MatchCreation> {
                   type: StepperType.horizontal,
                   currentStep: step,
                   onStepTapped: (_step) => setState(() => step = _step),
+                  // validar campos entre steps
                   onStepContinue: () => {
                         step < 2
                             ? setState(() => step += 1)
@@ -68,6 +69,10 @@ class _MatchCreationState extends State<MatchCreation> {
                           state: getStepState(2),
                           title: Text('Geral'),
                           content: MatchCreationStep3(match, setState)),
+                      // Step(
+                      //     state: getStepState(3),
+                      //     title: Text('Confirmação'),
+                      //     content: MatchCreationStep4(match)),
                     ])),
     );
   }

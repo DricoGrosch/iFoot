@@ -1,5 +1,4 @@
 import 'package:app/models/User.dart';
-import 'package:app/models/group.dart';
 import 'package:app/models/match.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

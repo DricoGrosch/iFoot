@@ -1,3 +1,4 @@
+import 'package:app/colors/black.dart';
 import 'package:app/pages/login.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'IFoot',
-      theme: ThemeData(primaryColor: Colors.black),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primaryColor: Colors.black, primarySwatch: primaryBlack),
       home: LoginPage(),
     );
   }

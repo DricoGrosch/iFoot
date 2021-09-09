@@ -14,9 +14,9 @@ class MatchController {
     }
   }
 
-  bool create() {
+  Future<bool> create() async {
     try {
-      var response = Services.post(Routes.MATCH, this.match.toJson());
+      await Services.post(Routes.MATCH, this.match.toJson());
       print('object');
       return true;
     } catch (e) {

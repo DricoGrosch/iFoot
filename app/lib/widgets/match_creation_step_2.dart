@@ -44,7 +44,7 @@ class _MatchCreationStep2State extends State<MatchCreationStep2> {
           return Center(child: CircularProgressIndicator());
         }
         return Container(
-          height: MediaQuery.of(context).size.height / 2 + 100,
+          height: MediaQuery.of(context).size.height / 2,
           child: GoogleMap(
             mapType: MapType.hybrid,
             initialCameraPosition: CameraPosition(

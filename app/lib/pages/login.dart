@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.white,
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 100, 8, 8),
+            padding: const EdgeInsets.fromLTRB(8, 50, 8, 8),
             child: Form(
               child: Column(
                 children: [

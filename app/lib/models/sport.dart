@@ -20,7 +20,7 @@ class Sport {
       'ATA': 'Atacante',
       'ANY': 'Indiferente'
     },
-    'icon': 'assets/images/soccer.png',
+    'icon': 'assets/images/indoor_soccer.png',
   };
 
   static const Map<String, dynamic> VOLLEYBAL = {
@@ -92,5 +92,6 @@ class Sport {
           return Sport.BIKE;
         }
     }
+    return null;
   }
 }
