@@ -24,4 +24,13 @@ class UserController {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
   }
+
+  void syncData() async {
+    final prefs = await SharedPreferences.getInstance();
+    User.getAppUser().token = prefs.getString('token');
+    var response =
+        await Services.get("${Routes.USER}${prefs.getString('userId')}/");
+    User.appUser = User.fromJson(response);
+    User.appUser.token = prefs.getString('token');
+  }
 }

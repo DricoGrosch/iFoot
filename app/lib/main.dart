@@ -1,7 +1,5 @@
-import 'package:app/api/routes.dart';
-import 'package:app/api/services.dart';
 import 'package:app/colors/black.dart';
-import 'package:app/models/User.dart';
+import 'package:app/controllers/user_controller.dart';
 import 'package:app/pages/home.dart';
 import 'package:app/pages/login.dart';
 import 'package:flutter/material.dart';
@@ -34,11 +32,7 @@ class MyApp extends StatelessWidget {
     if (prefs.getString('token') == null) {
       return LoginPage();
     } else {
-      User.getAppUser().token = prefs.getString('token');
-      var response =
-          await Services.get("${Routes.USER}${prefs.getString('userId')}/");
-      User.appUser = User.fromJson(response);
-      User.appUser.token = prefs.getString('token');
+      UserController().syncData();
       return HomePage();
     }
   }
