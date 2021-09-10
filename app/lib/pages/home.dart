@@ -39,13 +39,14 @@ class _HomePageState extends State<HomePage> {
             children: [
               UserAccountsDrawerHeader(
                 accountName: Text(User.getAppUser().username),
-                accountEmail: RatingStars(5),
+                accountEmail: RatingStars(4),
                 currentAccountPicture: CircleAvatar(
                   backgroundImage:
                       NetworkImage('${User.getAppUser().profileImage}'),
                 ),
               ),
               ListTile(
+                leading: Icon(Icons.supervised_user_circle),
                 title: const Text('Minhas partidas'),
                 onTap: () {
                   Navigator.pop(context);
@@ -53,6 +54,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
+                leading: Icon(Icons.person_search),
                 title: const Text('Outras partidas'),
                 onTap: () {
                   Navigator.pop(context);
@@ -60,14 +62,16 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               ListTile(
-                title: const Text('Meus Grupos'),
+                leading: Icon(Icons.group),
+                title: Text('Meus Grupos'),
                 onTap: () {
                   Navigator.pop(context);
                   setState(() => {index = 3});
                 },
               ),
               ListTile(
-                title: Text('Sair'),
+                leading: Icon(Icons.logout),
+                title: Text('Sair (n vai ficar aq)'),
                 onTap: () async {
                   await userController.handleLogout();
                   Navigator.of(context).pushAndRemoveUntil(
