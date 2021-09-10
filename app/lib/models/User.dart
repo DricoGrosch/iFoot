@@ -2,7 +2,7 @@ import 'package:app/models/group.dart';
 
 class User {
   int id;
-  String email, password, token, firstName, lastName, username;
+  String email, password, token, firstName, lastName, username, profileImage;
   static User appUser;
   List<Group> groups;
 
@@ -20,7 +20,8 @@ class User {
       this.password = '',
       this.firstName = '',
       this.lastName = '',
-      this.username = '']);
+      this.username = '',
+      this.profileImage]);
 
   static User fromJson(Map<String, dynamic> json) {
     User user = new User(
@@ -30,7 +31,8 @@ class User {
         json['password'] ?? '',
         json['first_name'] ?? '',
         json['last_name'] ?? '',
-        json['username'] ?? '');
+        json['username'] ?? '',
+        json['profile_image'] ?? '');
     user.groups = json['groups']
         .map<Group>((jsonGroup) =>
             new Group(id: jsonGroup['id'], name: jsonGroup['name']))

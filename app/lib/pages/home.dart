@@ -5,6 +5,7 @@ import 'package:app/pages/login.dart';
 import 'package:app/pages/my_matches_list.dart';
 import 'package:app/pages/other_matches_list.dart';
 import 'package:app/pages/profile.dart';
+import 'package:app/widgets/rating_stars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -37,9 +38,13 @@ class _HomePageState extends State<HomePage> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                  currentAccountPicture: FlutterLogo(),
-                  accountName: Text(User.getAppUser().username),
-                  accountEmail: Text('')),
+                accountName: Text(User.getAppUser().username),
+                accountEmail: RatingStars(5),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage:
+                      NetworkImage('${User.getAppUser().profileImage}'),
+                ),
+              ),
               ListTile(
                 title: const Text('Minhas partidas'),
                 onTap: () {
