@@ -9,5 +9,6 @@ class Match(models.Model):
     sport = models.CharField(max_length=255)
     date = models.DateTimeField()
     public = models.BooleanField(default=False)
+    max_members = models.IntegerField()
     users = models.ManyToManyField('CustomUser')
     group = models.ForeignKey('auth.Group', null=True, blank=True, on_delete=models.DO_NOTHING)

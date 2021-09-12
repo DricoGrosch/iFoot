@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 class Match {
-  int id;
+  int id, maxMembers;
   String location;
   double latitude, longitude;
   bool public;
@@ -21,6 +21,7 @@ class Match {
       this.date,
       this.sport,
       this.public = false,
+      this.maxMembers,
       this.users}) {
     users = [];
   }
@@ -30,13 +31,15 @@ class Match {
 
   static Match fromJson(Map<String, dynamic> json) {
     Match match = new Match(
-        id: json['id'],
-        location: json['location'],
-        latitude: json['latitude'],
-        longitude: json['longitude'],
-        sport: Sport.get(json['sport']),
-        public: json['public'],
-        date: DateTime.parse(json['date']));
+      id: json['id'],
+      location: json['location'],
+      latitude: json['latitude'],
+      longitude: json['longitude'],
+      sport: Sport.get(json['sport']),
+      public: json['public'],
+      date: DateTime.parse(json['date']),
+      maxMembers: json['max_members'],
+    );
 
     if (json.containsKey('users')) {
       json['users'].forEach((Map<String, dynamic> user) =>
@@ -57,6 +60,7 @@ class Match {
       'sport': this.sport['id'],
       'public': this.public,
       'group': this.group.id,
+      'max_members': this.maxMembers,
       'users': this.users.map((u) => u.id).toList(),
     };
   }

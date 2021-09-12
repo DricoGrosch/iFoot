@@ -4,6 +4,7 @@ import 'package:app/pages/home.dart';
 import 'package:app/widgets/match_creation_step_1.dart';
 import 'package:app/widgets/match_creation_step_2.dart';
 import 'package:app/widgets/match_creation_step_3.dart';
+import 'package:app/widgets/match_creation_step_4.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +18,7 @@ class MatchCreation extends StatefulWidget {
 class _MatchCreationState extends State<MatchCreation> {
   Match match = new Match(date: DateTime.now());
   int step = 0;
-  bool complete = false;
-  MatchController matchController = new MatchController();
+
   getStepState(currentStep) {
     if (currentStep > step) {
       return StepState.indexed;
@@ -29,51 +29,94 @@ class _MatchCreationState extends State<MatchCreation> {
     }
   }
 
+  void showErrorMessage(String message) {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void validateStep() async {
+    switch (step) {
+      case 0:
+        {
+          if (match.sport == null) {
+            showErrorMessage('Selecione a modalidade!');
+            return null;
+          }
+          break;
+        }
+      case 1:
+        {
+          if (match.latitude == null || match.longitude == null) {
+            showErrorMessage('Selecione a localização!');
+            return null;
+          }
+          break;
+        }
+      case 2:
+        {
+          if (!match.public && (match.group == null)) {
+            showErrorMessage(
+                'Sua partida é privada. Informe o grupo a qual ela pertence');
+            return null;
+          }
+          if (match.location == null) {
+            showErrorMessage('Informe a descrição do lugar!');
+            return;
+          }
+          if (match.maxMembers == null) {
+            showErrorMessage('Informe a descrição do lugar!');
+            return;
+          }
+          if (match.date == null) {
+            showErrorMessage('Informe a data|hora!');
+            return null;
+          }
+
+          break;
+        }
+      case 3:
+        {
+          break;
+        }
+    }
+    if (step < 3) {
+      setState(() => step += 1);
+    } else {
+      await new MatchController(match: match).create();
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (c) => HomePage()), (route) => false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    matchController.match = match;
     return Scaffold(
       appBar: AppBar(title: Text('Criação de nova partida')),
       body: Center(
-          child: complete
-              ? ElevatedButton(
-                  onPressed: () async => {
-                        await matchController.create(),
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => HomePage()))
-                      },
-                  child: Text('manda mano'))
-              : Stepper(
-                  type: StepperType.horizontal,
-                  currentStep: step,
-                  onStepTapped: (_step) => setState(() => step = _step),
-                  // validar campos entre steps
-                  onStepContinue: () => {
-                        step < 2
-                            ? setState(() => step += 1)
-                            : setState(() => complete = true)
-                      },
-                  onStepCancel: () => step > 0
-                      ? setState(() => step -= 1)
-                      : setState(() => complete = false),
-                  steps: [
-                      Step(
-                          state: getStepState(0),
-                          title: Text('Modalidade'),
-                          content: MatchCreationStep1(match, setState)),
-                      Step(
-                          state: getStepState(1),
-                          title: Text('Localização'),
-                          content: MatchCreationStep2(match, setState)),
-                      Step(
-                          state: getStepState(2),
-                          title: Text('Geral'),
-                          content: MatchCreationStep3(match, setState)),
-                      // Step(
-                      //     state: getStepState(3),
-                      //     title: Text('Confirmação'),
-                      //     content: MatchCreationStep4(match)),
-                    ])),
+          child: Stepper(
+              type: StepperType.horizontal,
+              currentStep: step,
+              onStepTapped: (_step) => setState(() => step = _step),
+              onStepContinue: () => validateStep(),
+              onStepCancel: () => step > 0 ? setState(() => step -= 1) : null,
+              steps: [
+            Step(
+                state: getStepState(0),
+                title: Icon(Icons.sports_soccer),
+                content: MatchCreationStep1(match, setState)),
+            Step(
+                state: getStepState(1),
+                title: Icon(Icons.map),
+                content: MatchCreationStep2(match, setState)),
+            Step(
+                state: getStepState(2),
+                title: Icon(Icons.details_sharp),
+                content: MatchCreationStep3(match, setState)),
+            Step(
+                state: getStepState(3),
+                title: Icon(Icons.check),
+                content: MatchCreationStep4(match)),
+          ])),
     );
   }
 }

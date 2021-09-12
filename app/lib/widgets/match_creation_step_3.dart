@@ -103,6 +103,20 @@ class MatchCreationStep3 extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
             child: TextFormField(
+              keyboardType: TextInputType.number,
+              onChanged: (value) =>
+                  {setState(() => match.maxMembers = int.parse(value))},
+              decoration: InputDecoration(
+                hintText: 'Número de participantes',
+                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0)),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
+            child: TextFormField(
               controller: TextEditingController(
                   text: DateFormat('dd/MM/yyyy').format(match.date)),
               onTap: () => _selectDate(context),
