@@ -1,6 +1,7 @@
 import 'package:app/controllers/user_controller.dart';
 import 'package:app/models/User.dart';
 import 'package:app/pages/home.dart';
+import 'package:app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -61,19 +62,11 @@ class _LoginPageState extends State<LoginPage> {
                           style:
                               ElevatedButton.styleFrom(primary: Colors.black),
                           onPressed: () async => {
-                            if (!await userController.handleLogin())
-                              {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text('Credenciais inválidas')))
-                              }
-                            else
-                              {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()))
-                              }
+                            await userController.handleLogin()
+                                ? Utils.changePage(
+                                    context, (context) => HomePage())
+                                : Utils.showSnackBar(
+                                    context, 'Credenciais inválidas')
                           },
                           child: Text('LOGIN',
                               style: TextStyle(color: Colors.white)),

@@ -1,10 +1,12 @@
 import 'package:app/controllers/match_controller.dart';
 import 'package:app/models/match.dart';
 import 'package:app/pages/home.dart';
+import 'package:app/utils/utils.dart';
 import 'package:app/widgets/match_creation_step_1.dart';
 import 'package:app/widgets/match_creation_step_2.dart';
 import 'package:app/widgets/match_creation_step_3.dart';
 import 'package:app/widgets/match_creation_step_4.dart';
+import 'package:app/widgets/successDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,17 +31,12 @@ class _MatchCreationState extends State<MatchCreation> {
     }
   }
 
-  void showErrorMessage(String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
-  }
-
   void validateStep() async {
     switch (step) {
       case 0:
         {
           if (match.sport == null) {
-            showErrorMessage('Selecione a modalidade!');
+            Utils.showSnackBar(context, 'Selecione a modalidade!');
             return null;
           }
           break;
@@ -47,7 +44,7 @@ class _MatchCreationState extends State<MatchCreation> {
       case 1:
         {
           if (match.latitude == null || match.longitude == null) {
-            showErrorMessage('Selecione a localização!');
+            Utils.showSnackBar(context, 'Selecione a localização!');
             return null;
           }
           break;
@@ -55,23 +52,22 @@ class _MatchCreationState extends State<MatchCreation> {
       case 2:
         {
           if (!match.public && (match.group == null)) {
-            showErrorMessage(
+            Utils.showSnackBar(context,
                 'Sua partida é privada. Informe o grupo a qual ela pertence');
             return null;
           }
           if (match.location == null) {
-            showErrorMessage('Informe a descrição do lugar!');
+            Utils.showSnackBar(context, 'Informe a descrição do lugar!');
             return;
           }
           if (match.maxMembers == null) {
-            showErrorMessage('Informe a descrição do lugar!');
+            Utils.showSnackBar(context, 'Informe a descrição do lugar!');
             return;
           }
           if (match.date == null) {
-            showErrorMessage('Informe a data|hora!');
+            Utils.showSnackBar(context, 'Informe a data|hora!');
             return null;
           }
-
           break;
         }
       case 3:
@@ -83,8 +79,10 @@ class _MatchCreationState extends State<MatchCreation> {
       setState(() => step += 1);
     } else {
       await new MatchController(match: match).create();
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (c) => HomePage()), (route) => false);
+      Utils.showMessageDialog(context, SuccessDialog(() {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (c) => HomePage()), (route) => false);
+      }));
     }
   }
 
