@@ -1,7 +1,9 @@
+import 'package:app/controllers/mapController.dart';
 import 'package:app/models/User.dart';
 import 'package:app/models/group.dart';
 import 'package:app/models/sport.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 class Match {
@@ -62,5 +64,15 @@ class Match {
       'max_members': this.maxMembers,
       'users': this.users.map((u) => u.id).toList(),
     };
+  }
+
+  Future<double> calcDistance() async {
+    var currentPosition = await MapController().fetchCurrentLocation();
+    return Geolocator.distanceBetween(
+      this.latitude,
+      this.longitude,
+      currentPosition.latitude,
+      currentPosition.longitude,
+    );
   }
 }

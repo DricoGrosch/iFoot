@@ -1,6 +1,10 @@
 import 'package:app/models/match.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 
 class MatchRow extends StatelessWidget {
   final Match match;
@@ -12,9 +16,71 @@ class MatchRow extends StatelessWidget {
       children: <Widget>[
         Center(
           child: Container(
-            height: 150,
+            height: 200,
             width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.fromLTRB(20, 50, 20, 0),
+            child: Center(
+              child: Container(
+                  margin: EdgeInsets.only(
+                    top: 65,
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(match.location.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25)),
+                                !match.public ? Icon(Icons.lock) : null,
+                              ],
+                              mainAxisAlignment: MainAxisAlignment.center,
+                            ),
+                            Text(
+                              DateFormat('dd/MM/yyyy')
+                                  .add_Hm()
+                                  .format(match.date),
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Divider(thickness: 2),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5, 20, 5, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.alt_route),
+                                FutureBuilder(
+                                    future: match.calcDistance(),
+                                    builder: (context, snapshot) {
+                                      return snapshot.hasData
+                                          ? Text(
+                                              ' ${(snapshot.data / 1000).toStringAsFixed(2)} Km',
+                                              style: TextStyle(fontSize: 15))
+                                          : Text('');
+                                    })
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.groups),
+                                Text(
+                                    ' ${match.users.length}/${match.maxMembers}')
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+            ),
             decoration: BoxDecoration(
                 color: Colors.grey.shade300,
                 shape: BoxShape.rectangle,

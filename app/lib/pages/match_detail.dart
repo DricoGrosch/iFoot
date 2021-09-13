@@ -57,7 +57,7 @@ class _MatchDetailState extends State<MatchDetail> {
                                     end: FractionalOffset(0, 1))),
                           ),
                           Container(
-                              margin: EdgeInsets.fromLTRB(20, 220, 20, 10),
+                              margin: EdgeInsets.only(top: 210),
                               child: Column(
                                 children: [MatchRow(snapshot.data)],
                               )),

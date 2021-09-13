@@ -20,7 +20,16 @@ class MatchCreationStep1 extends StatelessWidget {
             selected: match.sport != null ? match.sport == sport : false,
             selectedTileColor: Colors.grey,
             onTap: () => {setState(() => match.sport = sport)},
-            leading: Image.asset(sport['icon']),
+            leading: Container(
+              child: Icon(
+                sport['icon'],
+                color: Colors.black,
+              ),
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: sport['color'],
+                  borderRadius: BorderRadius.circular(100)),
+            ),
             title: Text(sport['name']),
           ),
         );

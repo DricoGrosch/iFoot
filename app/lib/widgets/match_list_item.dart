@@ -27,7 +27,8 @@ class MatchListItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(100)),
         ),
         title: Text(match.location),
-        subtitle: Text(DateFormat('dd/MM/yyyy').add_jm().format(match.date)),
+        subtitle: Text(
+            "${match.users.length}/${match.maxMembers} ${DateFormat('dd/MM/yyyy').add_Hm().format(match.date)}"),
         trailing: Icon(Icons.more_vert),
       ),
     );
