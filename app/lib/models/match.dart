@@ -25,8 +25,8 @@ class Match {
       this.users}) {
     users = [];
   }
-  Image getIcon() {
-    return Image.asset(this.sport['icon']);
+  IconData getIcon() {
+    return this.sport['icon'];
   }
 
   static Match fromJson(Map<String, dynamic> json) {
@@ -42,8 +42,7 @@ class Match {
     );
 
     if (json.containsKey('users')) {
-      json['users'].forEach((Map<String, dynamic> user) =>
-          {match.users.add(User.fromJson(user))});
+      json['users'].forEach((user) => {match.users.add(User.fromJson(user))});
     } else {
       match.users = [];
     }

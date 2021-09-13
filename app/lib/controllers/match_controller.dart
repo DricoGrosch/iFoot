@@ -17,11 +17,15 @@ class MatchController {
   Future<bool> create() async {
     try {
       await Services.post(Routes.MATCH, this.match.toJson());
-      print('object');
       return true;
     } catch (e) {
       print(e);
       return false;
     }
+  }
+
+  static Future<Match> fetchDetails(int id) async {
+    Match match = Match.fromJson(await Services.get('${Routes.MATCH}$id/'));
+    return match;
   }
 }

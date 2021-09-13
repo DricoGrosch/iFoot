@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Sport {
   static const Map<String, dynamic> SOCCER = {
     'id': 1,
@@ -9,7 +11,9 @@ class Sport {
       'ATA': 'Atacante',
       'ANY': 'Indiferente'
     },
-    'icon': 'assets/images/soccer.png',
+    'color': Colors.green,
+    'icon': Icons.sports_soccer,
+    'backgroundImage': 'assets/images/soccer_background.jpg',
   };
   static const Map<String, dynamic> INDOOR_SOCCER = {
     'id': 2,
@@ -20,7 +24,9 @@ class Sport {
       'ATA': 'Atacante',
       'ANY': 'Indiferente'
     },
-    'icon': 'assets/images/indoor_soccer.png',
+    'color': Colors.blue,
+    'icon': Icons.sports_soccer,
+    'backgroundImage': 'assets/images/indoor_soccer_background.jpg',
   };
 
   static const Map<String, dynamic> VOLLEYBAL = {
@@ -33,25 +39,33 @@ class Sport {
       'PON': 'Ponteiro',
       'ANY': 'Indiferente'
     },
-    'icon': 'assets/images/volei.png',
+    'color': Colors.yellow,
+    'icon': Icons.sports_volleyball,
+    'backgroundImage': 'assets/images/volei_background.jpg',
   };
   static const Map<String, dynamic> BASKETBALL = {
     'id': 4,
     'name': 'BASQUETEBOL',
     'positions': {},
-    'icon': 'assets/images/basketball.png',
+    'color': Colors.orange,
+    'icon': Icons.sports_basketball,
+    'backgroundImage': 'assets/images/basketball_background.jpg',
   };
   static const Map<String, dynamic> TENIS = {
     'id': 5,
     'name': 'TÊNIS',
     'positions': {},
-    'icon': 'assets/images/tenis.png',
+    'color': Colors.green,
+    'icon': Icons.sports_tennis,
+    'backgroundImage': 'assets/images/tenis_background.jpg',
   };
   static const Map<String, dynamic> BIKE = {
     'id': 6,
     'name': 'BIKE',
     'positions': {},
-    'icon': 'assets/images/bike.png',
+    'color': Colors.brown,
+    'icon': Icons.directions_bike,
+    'backgroundImage': 'assets/images/bike_background.jpg',
   };
 
   static List getSports() {

@@ -8,6 +8,8 @@ class MatchViewSet(LoginRequiredModelViewSet):
     queryset = Match.objects.none()
 
     def get_queryset(self):
+        if self.action == 'retrieve':
+            return Match.objects.filter(id=self.kwargs['pk'])
         qs = self.request.user.match_set.all()
         if 'other' in self.request.GET:
             ids_to_exclude = []
