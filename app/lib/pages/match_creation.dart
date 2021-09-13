@@ -6,7 +6,7 @@ import 'package:app/widgets/match_creation_step_1.dart';
 import 'package:app/widgets/match_creation_step_2.dart';
 import 'package:app/widgets/match_creation_step_3.dart';
 import 'package:app/widgets/match_creation_step_4.dart';
-import 'package:app/widgets/successDialog.dart';
+import 'package:app/widgets/success_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

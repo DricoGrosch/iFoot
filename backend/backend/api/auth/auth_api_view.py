@@ -6,3 +6,4 @@ from rest_framework.views import APIView
 class LoginRequiredApiView(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
+

@@ -11,7 +11,7 @@ router.register('group', GroupViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('login/', CustomObtainAuthToken.as_view()),
-    path('match/subscribe/', MatchSubscribe.as_view()),
-    path('match/unsubscribe/', MatchUnsubscribe.as_view()),
-    path('user/register/',  UserRegisterAPIView.as_view())
+    path('match_subscribe/', MatchSubscribe.as_view()),
+    path('match_unsubscribe/', MatchUnsubscribe.as_view()),
+    path('user_register/',  UserRegisterAPIView.as_view())
 ]

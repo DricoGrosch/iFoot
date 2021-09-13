@@ -1,5 +1,8 @@
 import 'package:app/controllers/match_controller.dart';
-import 'package:app/widgets/matchRow.dart';
+import 'package:app/controllers/user_controller.dart';
+import 'package:app/models/User.dart';
+import 'package:app/widgets/match_row.dart';
+import 'package:app/widgets/match_user_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +17,7 @@ class MatchDetail extends StatefulWidget {
 class _MatchDetailState extends State<MatchDetail> {
   final int id;
   _MatchDetailState(this.id);
-
+  UserController userController = new UserController(user: User.getAppUser());
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -24,11 +27,8 @@ class _MatchDetailState extends State<MatchDetail> {
               ? Scaffold(
                   appBar: AppBar(
                     title: Text('Detalhes'),
-                    // automaticallyImplyLeading: false,
                   ),
-                  body: Container(
-                    constraints: BoxConstraints.expand(),
-                    color: Colors.black,
+                  body: SingleChildScrollView(
                     child: Stack(
                         alignment: AlignmentDirectional.topStart,
                         children: <Widget>[
@@ -59,10 +59,33 @@ class _MatchDetailState extends State<MatchDetail> {
                           Container(
                               margin: EdgeInsets.only(top: 210),
                               child: Column(
-                                children: [MatchRow(snapshot.data)],
+                                children: [
+                                  MatchRow(snapshot.data),
+                                  MatchUserList(snapshot.data),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            userController
+                                                .unsubscribeToMatch(id);
+                                            setState(() {});
+                                          },
+                                          child: Text('Revogar vaga')),
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            userController.subscribeToMatch(id);
+                                            setState(() {});
+                                          },
+                                          child: Text('Confirmar presença')),
+                                    ],
+                                  )
+                                ],
                               )),
                         ]),
-                  ))
+                  ),
+                )
               : Center(
                   child: CircularProgressIndicator(),
                 );

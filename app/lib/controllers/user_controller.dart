@@ -33,4 +33,16 @@ class UserController {
     User.appUser = User.fromJson(response);
     User.appUser.token = prefs.getString('token');
   }
+
+  Future<bool> subscribeToMatch(int matchId) async {
+    var response =
+        await Services.post(Routes.MATCH_SUBSCRIBE, {'match_id': matchId});
+    return response.containsKey('error');
+  }
+
+  Future<bool> unsubscribeToMatch(int matchId) async {
+    var response =
+        await Services.post(Routes.MATCH_UNSUBSCRIBE, {'match_id': matchId});
+    return response.containsKey('error');
+  }
 }
