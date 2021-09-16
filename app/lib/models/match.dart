@@ -24,6 +24,7 @@ class Match {
       this.sport,
       this.public = false,
       this.maxMembers,
+      this.group,
       this.users}) {
     users = [];
   }
@@ -33,15 +34,15 @@ class Match {
 
   static Match fromJson(Map<String, dynamic> json) {
     Match match = new Match(
-      id: json['id'],
-      location: json['location'],
-      latitude: json['latitude'],
-      longitude: json['longitude'],
-      sport: Sport.get(json['sport']),
-      public: json['public'],
-      date: DateTime.parse(json['date']),
-      maxMembers: json['max_members'],
-    );
+        id: json['id'],
+        location: json['location'],
+        latitude: json['latitude'],
+        longitude: json['longitude'],
+        sport: Sport.get(json['sport']),
+        public: json['public'],
+        date: DateTime.parse(json['date']),
+        maxMembers: json['max_members'],
+        group: new Group(id: json['group']['id'], name: json['group']['name']));
 
     if (json.containsKey('users')) {
       json['users'].forEach((user) => {match.users.add(User.fromJson(user))});

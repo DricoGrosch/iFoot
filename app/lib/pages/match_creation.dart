@@ -101,19 +101,25 @@ class _MatchCreationState extends State<MatchCreation> {
             Step(
                 state: getStepState(0),
                 title: Icon(Icons.sports_soccer),
-                content: MatchCreationStep1(match, setState)),
+                content: step == 0
+                    ? MatchCreationStep1(match, setState)
+                    : Container()),
             Step(
                 state: getStepState(1),
                 title: Icon(Icons.map),
-                content: MatchCreationStep2(match, setState)),
+                content: step == 1
+                    ? MatchCreationStep2(match, setState)
+                    : Container()),
             Step(
                 state: getStepState(2),
                 title: Icon(Icons.details_sharp),
-                content: MatchCreationStep3(match, setState)),
+                content: step == 2
+                    ? MatchCreationStep3(match, setState)
+                    : Container()),
             Step(
                 state: getStepState(3),
                 title: Icon(Icons.check),
-                content: MatchCreationStep4(match)),
+                content: step == 3 ? MatchCreationStep4(match) : Container()),
           ])),
     );
   }

@@ -39,6 +39,7 @@ class MatchRow extends StatelessWidget {
                               ],
                               mainAxisAlignment: MainAxisAlignment.center,
                             ),
+                            !match.public ? Text(match.group.name) : null,
                             Text(
                               DateFormat('dd/MM/yyyy')
                                   .add_Hm()

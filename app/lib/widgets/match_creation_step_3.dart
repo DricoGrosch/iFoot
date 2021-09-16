@@ -65,29 +65,40 @@ class MatchCreationStep3 extends StatelessWidget {
               ),
             ],
           ))),
-          DropdownButton(
-              value: match.group != null ? match.group.id : '',
-              icon: const Icon(Icons.arrow_downward),
-              iconSize: 24,
-              elevation: 16,
-              style: const TextStyle(color: Colors.deepPurple),
-              underline: Container(
-                height: 2,
-                color: Colors.deepPurpleAccent,
-              ),
-              onChanged: (id) => {
-                    setState(() => match.group = User.getAppUser()
-                        .groups
-                        .toList()
-                        .firstWhere((g) => g.id == id))
-                  },
-              items: [
-                DropdownMenuItem(value: '', child: Text('Selecione o grupo')),
-                ...User.getAppUser().groups.map<DropdownMenuItem>((group) {
-                  return DropdownMenuItem(
-                      value: group.id, child: Text(group.name));
-                }).toList()
-              ]),
+          !match.public
+              ? Container(
+                  width: 300,
+                  child: DropdownButton(
+                      isExpanded: true,
+                      value: match.group != null ? match.group.id : '',
+                      icon: const Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      underline: Container(
+                        height: 2,
+                        width: 20,
+                        color: Colors.black,
+                      ),
+                      onChanged: (id) => {
+                            setState(() => match.group = User.getAppUser()
+                                .groups
+                                .toList()
+                                .firstWhere((g) => g.id == id))
+                          },
+                      items: [
+                        DropdownMenuItem(
+                            value: '',
+                            child: Center(child: Text('Selecione o grupo'))),
+                        ...User.getAppUser()
+                            .groups
+                            .map<DropdownMenuItem>((group) {
+                          return DropdownMenuItem(
+                              value: group.id,
+                              child: Center(child: Text(group.name)));
+                        }).toList()
+                      ]),
+                )
+              : Container(),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
             child: TextFormField(
