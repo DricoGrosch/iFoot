@@ -21,10 +21,17 @@ class _MyMatchesListState extends State<MyMatchesList> {
           future: MatchController.fetchMatches(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListView(
-                  children: snapshot.data.map<Widget>((json) {
-                return MatchListItem(match: Match.fromJson(json));
-              }).toList());
+              return RefreshIndicator(
+                onRefresh: () {
+                  return Future.delayed(Duration(seconds: 1), () {
+                    setState(() {});
+                  });
+                },
+                child: ListView(
+                    children: snapshot.data.map<Widget>((json) {
+                  return MatchListItem(match: Match.fromJson(json));
+                }).toList()),
+              );
             } else {
               return Center(child: CircularProgressIndicator());
             }
