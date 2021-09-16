@@ -17,4 +17,4 @@ class MatchShortSerializer(ModelSerializer):
     group  = GroupSerializer(read_only=True)
     class Meta:
         model = Match
-        fields = ['id', 'location', 'date', 'max_members', 'sport','group','public']
+        fields = ['id', 'description', 'date', 'max_members', 'sport','group','public','address']

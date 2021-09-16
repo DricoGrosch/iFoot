@@ -56,7 +56,7 @@ class _MatchCreationState extends State<MatchCreation> {
                 'Sua partida é privada. Informe o grupo a qual ela pertence');
             return null;
           }
-          if (match.location == null) {
+          if (match.description == null) {
             Utils.showSnackBar(context, 'Informe a descrição do lugar!');
             return;
           }

@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 
 class Match {
   int id, maxMembers;
-  String location;
+  String description;
   double latitude, longitude;
   bool public;
   Map<String, dynamic> sport;
@@ -17,7 +17,7 @@ class Match {
   List<User> users = [];
   Match(
       {this.id,
-      this.location,
+      this.description,
       this.latitude,
       this.longitude,
       this.date,
@@ -35,7 +35,7 @@ class Match {
   static Match fromJson(Map<String, dynamic> json) {
     Match match = new Match(
         id: json['id'],
-        location: json['location'],
+        description: json['description'],
         latitude: json['latitude'],
         longitude: json['longitude'],
         sport: Sport.get(json['sport']),
@@ -57,7 +57,7 @@ class Match {
   Map<String, dynamic> toJson() {
     return {
       'id': this.id,
-      'location': this.location,
+      'description': this.description,
       'latitude': this.latitude,
       'longitude': this.longitude,
       'date': DateFormat('yyyy-MM-dd').add_Hm().format(this.date),

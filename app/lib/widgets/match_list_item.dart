@@ -27,7 +27,7 @@ class MatchListItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(100)),
         ),
         title: Row(children: [
-          Text(match.location),
+          Text(match.description),
           !match.public
               ? Icon(
                   Icons.lock,

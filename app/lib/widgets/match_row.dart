@@ -31,7 +31,7 @@ class MatchRow extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Text(match.location.toString(),
+                                Text(match.description.toString(),
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25)),

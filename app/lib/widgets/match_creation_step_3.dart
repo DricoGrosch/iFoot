@@ -102,7 +102,7 @@ class MatchCreationStep3 extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
             child: TextFormField(
-              onChanged: (value) => {setState(() => match.location = value)},
+              onChanged: (value) => {setState(() => match.description = value)},
               decoration: InputDecoration(
                 hintText: 'Descrição do lugar',
                 contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
