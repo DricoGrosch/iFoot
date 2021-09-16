@@ -26,10 +26,17 @@ class MatchListItem extends StatelessWidget {
               color: match.sport['color'],
               borderRadius: BorderRadius.circular(100)),
         ),
-        title: Text(match.location),
+        title: Row(children: [
+          Text(match.location),
+          !match.public
+              ? Icon(
+                  Icons.lock,
+                  size: 15,
+                )
+              : Container()
+        ]),
         subtitle: Text(
             "${match.users.length}/${match.maxMembers} ${DateFormat('dd/MM/yyyy').add_Hm().format(match.date)}"),
-        trailing: Icon(Icons.more_vert),
       ),
     );
   }

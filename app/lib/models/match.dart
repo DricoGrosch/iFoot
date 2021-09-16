@@ -42,7 +42,9 @@ class Match {
         public: json['public'],
         date: DateTime.parse(json['date']),
         maxMembers: json['max_members'],
-        group: new Group(id: json['group']['id'], name: json['group']['name']));
+        group: json['group'] != null
+            ? new Group(id: json['group']['id'], name: json['group']['name'])
+            : null);
 
     if (json.containsKey('users')) {
       json['users'].forEach((user) => {match.users.add(User.fromJson(user))});

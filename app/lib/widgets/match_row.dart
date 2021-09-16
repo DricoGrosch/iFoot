@@ -35,11 +35,13 @@ class MatchRow extends StatelessWidget {
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25)),
-                                !match.public ? Icon(Icons.lock) : null,
+                                !match.public ? Icon(Icons.lock) : Container(),
                               ],
                               mainAxisAlignment: MainAxisAlignment.center,
                             ),
-                            !match.public ? Text(match.group.name) : null,
+                            !match.public
+                                ? Text(match.group.name)
+                                : Container(),
                             Text(
                               DateFormat('dd/MM/yyyy')
                                   .add_Hm()
