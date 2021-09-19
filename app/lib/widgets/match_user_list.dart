@@ -19,10 +19,12 @@ class MatchUserList extends StatelessWidget {
             return Card(
               child: ListTile(
                 leading: CircleAvatar(
-                  child: Image.network(
-                    user.profileImage,
-                    fit: BoxFit.cover,
-                  ),
+                  child: user.profileImage != null
+                      ? Image.network(
+                          user.profileImage,
+                          fit: BoxFit.cover,
+                        )
+                      : AssetImage('assets/images/default_user_image.png'),
                 ),
                 title: Text('${user.firstName} ${user.lastName}'),
                 subtitle: RatingStars(4),

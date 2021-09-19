@@ -12,10 +12,10 @@ class UserSerializer(ModelSerializer):
         extra_kwargs = {'password': {'required': False}}
 
 
-    def create(self, validated_data):
-        user = super(UserSerializer, self).create(validated_data)
-        user.set_password(validated_data.get('password'))
-        user.save()
-        return user
+    # def create(self, validated_data):
+    #     user = super(UserSerializer, self).create(validated_data)
+    #     user.set_password(validated_data.get('password'))
+    #     user.save()
+    #     return user
 
 

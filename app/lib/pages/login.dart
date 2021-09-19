@@ -1,6 +1,7 @@
 import 'package:app/controllers/user_controller.dart';
 import 'package:app/models/User.dart';
 import 'package:app/pages/home.dart';
+import 'package:app/pages/user_register.dart';
 import 'package:app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,23 +55,19 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: 24.0),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.black),
-                          onPressed: () async => {
-                            await userController.handleLogin()
-                                ? Utils.changePage(
-                                    context, (context) => HomePage())
-                                : Utils.showSnackBar(
-                                    context, 'Credenciais inválidas')
-                          },
-                          child: Text('LOGIN',
-                              style: TextStyle(color: Colors.white)),
-                        ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.black),
+                        onPressed: () async => {
+                          await userController.handleLogin()
+                              ? Utils.changePage(
+                                  context, (context) => HomePage())
+                              : Utils.showSnackBar(
+                                  context, 'Credenciais inválidas')
+                        },
+                        child: Text('Login',
+                            style: TextStyle(color: Colors.white)),
                       ),
                     ),
                   ),
@@ -86,7 +83,9 @@ class _LoginPageState extends State<LoginPage> {
                       'Não possui uma conta ?',
                       style: TextStyle(color: Colors.black54),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Utils.changePage(context, (context) => UserRegister());
+                    },
                   )
                 ],
               ),

@@ -39,6 +39,7 @@ dependencies:
   geolocator: ^7.6.0
   places_service: ^0.1.0+2
   progress_timeline: ^0.0.5
+  flutter_form_builder: ^6.1.0+1
 
 dev_dependencies:
   flutter_test:

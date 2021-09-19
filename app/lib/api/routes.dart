@@ -4,4 +4,5 @@ class Routes {
   static const String USER = 'user/';
   static const String MATCH_SUBSCRIBE = 'match_subscribe/';
   static const String MATCH_UNSUBSCRIBE = 'match_unsubscribe/';
+  static const String REGISTER = 'user_register/';
 }

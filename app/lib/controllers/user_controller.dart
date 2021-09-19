@@ -20,6 +20,20 @@ class UserController {
     return true;
   }
 
+  register() async {
+    final prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> response =
+        await Services.post(Routes.REGISTER, this.user.toJson());
+    if (response.containsKey('errors')) {
+      return response['errors'];
+    } else {
+      User.appUser = User.fromJson(response);
+      prefs.setString('token', User.getAppUser().token.toString());
+      prefs.setString('userId', User.getAppUser().id.toString());
+    }
+    return null;
+  }
+
   handleLogout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();

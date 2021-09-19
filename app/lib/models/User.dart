@@ -2,7 +2,14 @@ import 'package:app/models/group.dart';
 
 class User {
   int id;
-  String email, password, token, firstName, lastName, username, profileImage;
+  String email,
+      password,
+      password2,
+      token,
+      firstName,
+      lastName,
+      username,
+      profileImage;
   static User appUser;
   List<Group> groups;
 
@@ -38,5 +45,19 @@ class User {
             new Group(id: jsonGroup['id'], name: jsonGroup['name']))
         .toList();
     return user;
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': this.id,
+      'email': this.email,
+      'token': this.token,
+      'first_name': this.firstName,
+      'last_name': this.lastName,
+      'username': this.username,
+      'profile_image': this.profileImage,
+      'password': this.password,
+      'password2': this.password2,
+    };
   }
 }
