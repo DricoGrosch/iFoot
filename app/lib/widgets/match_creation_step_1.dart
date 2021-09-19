@@ -10,9 +10,7 @@ class MatchCreationStep1 extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    print('object');
     return Container(
-      height: MediaQuery.of(context).size.height / 2,
       child: ListView(
           children: Sport.getSports().map<Widget>((sport) {
         return Card(

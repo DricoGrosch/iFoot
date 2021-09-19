@@ -9,6 +9,7 @@ import 'package:app/widgets/match_creation_step_4.dart';
 import 'package:app/widgets/success_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_timeline/progress_timeline.dart';
 
 class MatchCreation extends StatefulWidget {
   const MatchCreation({Key key}) : super(key: key);
@@ -19,54 +20,50 @@ class MatchCreation extends StatefulWidget {
 
 class _MatchCreationState extends State<MatchCreation> {
   Match match = new Match(date: DateTime.now());
+  ProgressTimeline stepper;
   int step = 0;
 
-  getStepState(currentStep) {
-    if (currentStep > step) {
-      return StepState.indexed;
-    } else if (currentStep < step) {
-      return StepState.complete;
-    } else {
-      return StepState.editing;
-    }
-  }
-
-  void validateStep() async {
+  void validateStep(context) {
+    bool error = false;
     switch (step) {
       case 0:
         {
           if (match.sport == null) {
-            Utils.showSnackBar(context, 'Selecione a modalidade!');
-            return null;
+            error = true;
+            // Utils.showSnackBar(context, 'Selecione a modalidade!');
           }
           break;
         }
       case 1:
         {
           if (match.latitude == null || match.longitude == null) {
-            Utils.showSnackBar(context, 'Selecione a localização!');
-            return null;
+            error = true;
+            // Utils.showSnackBar(context, 'Selecione a localização!');
           }
           break;
         }
       case 2:
         {
           if (!match.public && (match.group == null)) {
-            Utils.showSnackBar(context,
-                'Sua partida é privada. Informe o grupo a qual ela pertence');
-            return null;
+            error = true;
+            // Utils.showSnackBar(context,
+            //     'Sua partida é privada. Informe o grupo a qual ela pertence');
+            break;
           }
           if (match.description == null) {
-            Utils.showSnackBar(context, 'Informe a descrição do lugar!');
-            return;
+            error = true;
+            // Utils.showSnackBar(context, 'Informe a descrição do lugar!');
+            break;
           }
           if (match.maxMembers == null) {
-            Utils.showSnackBar(context, 'Informe a descrição do lugar!');
-            return;
+            error = true;
+            // Utils.showSnackBar(context, 'Informe a descrição do lugar!');
+            break;
           }
           if (match.date == null) {
-            Utils.showSnackBar(context, 'Informe a data|hora!');
-            return null;
+            error = true;
+            // Utils.showSnackBar(context, 'Informe a data|hora!');
+            break;
           }
           break;
         }
@@ -75,52 +72,124 @@ class _MatchCreationState extends State<MatchCreation> {
           break;
         }
     }
-    if (step < 3) {
-      setState(() => step += 1);
-    } else {
-      await new MatchController(match: match).create();
-      Utils.showMessageDialog(context, SuccessDialog(() {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (c) => HomePage()), (route) => false);
-      }));
+    if (error) {
+      stepper.failCurrentStage();
+      return;
     }
+    stepper.gotoNextStage();
+    setState(() {
+      step = stepper.state.currentStageIndex;
+    });
+  }
+
+  Widget getContent() {
+    switch (step) {
+      case 0:
+        {
+          return MatchCreationStep1(match, setState);
+        }
+      case 1:
+        {
+          return MatchCreationStep2(match, setState);
+        }
+      case 2:
+        {
+          return MatchCreationStep3(match, setState);
+        }
+      case 3:
+        {
+          return MatchCreationStep4(match);
+        }
+    }
+    return MatchCreationStep1(match, setState);
+  }
+
+  void submitForm() async {
+    await new MatchController(match: match).create();
+    Utils.showMessageDialog(context, SuccessDialog(() {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (c) => HomePage()), (route) => false);
+    }));
+  }
+
+  @override
+  void initState() {
+    stepper = new ProgressTimeline(
+      states: [
+        SingleState(stateTitle: "Modalidade"),
+        SingleState(stateTitle: "Local"),
+        SingleState(stateTitle: "Geral"),
+        SingleState(stateTitle: "Confirmação"),
+      ],
+    );
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Criação de nova partida')),
-      body: Center(
-          child: Stepper(
-              type: StepperType.horizontal,
-              currentStep: step,
-              onStepTapped: (_step) => setState(() => step = _step),
-              onStepContinue: () => validateStep(),
-              onStepCancel: () => step > 0 ? setState(() => step -= 1) : null,
-              steps: [
-            Step(
-                state: getStepState(0),
-                title: Icon(Icons.sports_soccer),
-                content: step == 0
-                    ? MatchCreationStep1(match, setState)
-                    : Container()),
-            Step(
-                state: getStepState(1),
-                title: Icon(Icons.map),
-                content: step == 1
-                    ? MatchCreationStep2(match, setState)
-                    : Container()),
-            Step(
-                state: getStepState(2),
-                title: Icon(Icons.details_sharp),
-                content: step == 2
-                    ? MatchCreationStep3(match, setState)
-                    : Container()),
-            Step(
-                state: getStepState(3),
-                title: Icon(Icons.check),
-                content: step == 3 ? MatchCreationStep4(match) : Container()),
-          ])),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              children: [
+                Container(
+                  child: Stack(
+                    children: [
+                      Container(
+                        child: stepper,
+                      ),
+                      Container(
+                        height: 500,
+                        margin: EdgeInsets.only(top: 50),
+                        child: getContent(),
+                      )
+                    ],
+                  ),
+                  height: MediaQuery.of(context).size.height - 200,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 100,
+            width: double.maxFinite,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                    width: double.infinity,
+                    child: step == stepper.states.length - 1
+                        ? ElevatedButton(
+                            onPressed: () {
+                              submitForm();
+                            },
+                            child: Text('Confirmar'))
+                        : ElevatedButton(
+                            onPressed: () {
+                              validateStep(context);
+                            },
+                            child: Text('Próximo'))),
+                step > 0
+                    ? SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              stepper.gotoPreviousStage();
+                              setState(() {
+                                step = stepper.state.currentStageIndex;
+                              });
+                            },
+                            child: Text('Voltar')),
+                      )
+                    : Container()
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

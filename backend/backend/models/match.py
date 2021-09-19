@@ -6,7 +6,7 @@ class Match(models.Model):
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
     sport = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
+    address = models.CharField(max_length=255,default='')
     date = models.DateTimeField()
     public = models.BooleanField(default=False)
     max_members = models.IntegerField()

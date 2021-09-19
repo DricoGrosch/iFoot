@@ -18,12 +18,12 @@ class SuccessDialog extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Material(
-                child: Text("Partida criada com sucesso!"),
+                child: Text("Sucesso!"),
                 textStyle: TextStyle(color: Colors.green, fontSize: 40)),
           ),
           ElevatedButton(
               child: Text(
-                "Continue",
+                "Continuar",
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: () => successCallback())
