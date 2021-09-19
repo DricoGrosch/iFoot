@@ -14,7 +14,7 @@ class CustomObtainAuthToken(ObtainAuthToken):
             user = serializer.validated_data['user']
             token, created = Token.objects.get_or_create(user=user)
             return Response(
-                {**UserSerializer(user).data, 'token': token.key},
+                {**UserSerializer(user,context={"request": self.request}).data, 'token': token.key},
             )
         except Exception as e:
             print(e)

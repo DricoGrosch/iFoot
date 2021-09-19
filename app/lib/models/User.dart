@@ -39,7 +39,7 @@ class User {
         json['first_name'] ?? '',
         json['last_name'] ?? '',
         json['username'] ?? '',
-        json['profile_image'] ?? '');
+        json['profile_image'] ?? null);
     user.groups = json['groups']
         .map<Group>((jsonGroup) =>
             new Group(id: jsonGroup['id'], name: jsonGroup['name']))
