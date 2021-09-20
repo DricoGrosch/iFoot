@@ -23,13 +23,7 @@ class MatchUserList extends StatelessWidget {
                   height: 200,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: user.profileImage != null
-                          ? NetworkImage(
-                              user.profileImage,
-                            )
-                          : AssetImage('assets/images/default_user_image.png'),
-                    ),
+                    image: DecorationImage(image: user.getProfileImage()),
                   ),
                 ),
                 title: Text('${user.firstName} ${user.lastName}'),

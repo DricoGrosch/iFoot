@@ -30,7 +30,7 @@ class _MatchCreationState extends State<MatchCreation> {
         {
           if (match.sport == null) {
             error = true;
-            // Utils.showSnackBar(context, 'Selecione a modalidade!');
+            Utils.showSnackBar(context, 'Selecione a modalidade!');
           }
           break;
         }
@@ -38,7 +38,7 @@ class _MatchCreationState extends State<MatchCreation> {
         {
           if (match.latitude == null || match.longitude == null) {
             error = true;
-            // Utils.showSnackBar(context, 'Selecione a localização!');
+            Utils.showSnackBar(context, 'Selecione a localização!');
           }
           break;
         }
@@ -46,23 +46,23 @@ class _MatchCreationState extends State<MatchCreation> {
         {
           if (!match.public && (match.group == null)) {
             error = true;
-            // Utils.showSnackBar(context,
-            //     'Sua partida é privada. Informe o grupo a qual ela pertence');
+            Utils.showSnackBar(context,
+                'Sua partida é privada. Informe o grupo a qual ela pertence');
             break;
           }
           if (match.description == null) {
             error = true;
-            // Utils.showSnackBar(context, 'Informe a descrição do lugar!');
+            Utils.showSnackBar(context, 'Informe a descrição do lugar!');
             break;
           }
           if (match.maxMembers == null) {
             error = true;
-            // Utils.showSnackBar(context, 'Informe a descrição do lugar!');
+            Utils.showSnackBar(context, 'Informe a descrição do lugar!');
             break;
           }
           if (match.date == null) {
             error = true;
-            // Utils.showSnackBar(context, 'Informe a data|hora!');
+            Utils.showSnackBar(context, 'Informe a data|hora!');
             break;
           }
           break;

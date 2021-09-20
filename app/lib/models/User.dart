@@ -1,4 +1,6 @@
 import 'package:app/models/group.dart';
+import 'package:app/settings.dart';
+import 'package:flutter/cupertino.dart';
 
 class User {
   int id;
@@ -59,5 +61,11 @@ class User {
       'password': this.password,
       'password2': this.password2,
     };
+  }
+
+  ImageProvider getProfileImage() {
+    return this.profileImage != null
+        ? NetworkImage(this.profileImage)
+        : AssetImage('assets/images/default_user_image.png');
   }
 }

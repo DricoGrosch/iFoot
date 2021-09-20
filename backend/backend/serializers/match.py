@@ -7,7 +7,7 @@ from backend.serializers.user import UserSerializer
 
 class MatchSerializer(ModelSerializer):
     users = UserSerializer(many=True, read_only=True)
-    group  = GroupSerializer(read_only=True)
+    group  = GroupSerializer(read_only=True,)
     class Meta:
         model = Match
         fields = '__all__'

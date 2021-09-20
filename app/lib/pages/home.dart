@@ -41,10 +41,7 @@ class _HomePageState extends State<HomePage> {
                 accountName: Text(User.getAppUser().username),
                 accountEmail: RatingStars(4),
                 currentAccountPicture: CircleAvatar(
-                  backgroundImage: User.getAppUser().profileImage != null
-                      ? NetworkImage('${User.getAppUser().profileImage}')
-                      : AssetImage('assets/images/default_user_image.png'),
-                ),
+                    backgroundImage: User.getAppUser().getProfileImage()),
               ),
               ListTile(
                 leading: Icon(Icons.supervised_user_circle),
