@@ -24,4 +24,6 @@ class MatchViewSet(LoginRequiredModelViewSet):
     def get_serializer_class(self):
         if self.action == 'list':
             return MatchShortSerializer
+        elif self.action =='retrieve':
+            return MatchDetailSerializer
         return MatchSerializer
