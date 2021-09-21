@@ -57,7 +57,7 @@ class _MatchCreationState extends State<MatchCreation> {
           }
           if (match.maxMembers == null) {
             error = true;
-            Utils.showSnackBar(context, 'Informe a descrição do lugar!');
+            Utils.showSnackBar(context, 'Informe a o número de participantes!');
             break;
           }
           if (match.date == null) {

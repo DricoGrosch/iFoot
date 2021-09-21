@@ -14,6 +14,7 @@ class GroupViewSet(LoginRequiredModelViewSet):
 
     def create(self, request, *args, **kwargs):
         response = super(GroupViewSet, self).create(request, *args, **kwargs)
-        serializer = self.get_serializer(data=request.data)
-        self.request.user.groups.add(serializer.instance)
+        print(self.request.user.groups.all())
+        self.request.user.groups.add(Group.objects.get(id=response.data['id']))
+        print(self.request.user.groups.all())
         return response

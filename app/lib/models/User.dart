@@ -1,5 +1,4 @@
 import 'package:app/models/group.dart';
-import 'package:app/settings.dart';
 import 'package:flutter/cupertino.dart';
 
 class User {

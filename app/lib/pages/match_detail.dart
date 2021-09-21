@@ -36,44 +36,50 @@ class _MatchDetailState extends State<MatchDetail> {
                 title: Text('Detalhes'),
               ),
               body: SingleChildScrollView(
-                child: Stack(
-                    alignment: AlignmentDirectional.topStart,
-                    children: <Widget>[
-                      Container(
-                        child: Image.asset(
-                          snapshot.data.sport['backgroundImage'],
-                          fit: BoxFit.cover,
-                          height: 300,
-                        ),
-                        constraints: BoxConstraints.expand(height: 300),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 190),
-                        height: 110,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                colors: <Color>[
-                              Color(0x00736AB7),
-                              Colors.black,
-                            ],
-                                stops: [
-                              0,
-                              .95
-                            ],
-                                begin: FractionalOffset(0, 0),
-                                end: FractionalOffset(0, 1))),
-                      ),
-                      Container(
-                          margin: EdgeInsets.only(top: 210),
-                          child: Column(
+                child:
+                    Stack(alignment: AlignmentDirectional.topStart, children: <
+                        Widget>[
+                  Container(
+                    child: Image.asset(
+                      snapshot.data.sport['backgroundImage'],
+                      fit: BoxFit.cover,
+                      height: 300,
+                    ),
+                    constraints: BoxConstraints.expand(height: 300),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 190),
+                    height: 110,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: <Color>[
+                          Color(0x00736AB7),
+                          Colors.black,
+                        ],
+                            stops: [
+                          0,
+                          .95
+                        ],
+                            begin: FractionalOffset(0, 0),
+                            end: FractionalOffset(0, 1))),
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(top: 210),
+                      child: Column(
+                        children: [
+                          MatchRow(snapshot.data),
+                          MatchUserList(snapshot.data),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              MatchRow(snapshot.data),
-                              MatchUserList(snapshot.data),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  ElevatedButton(
+                              alreadySubscribed
+                                  ? ElevatedButton(
+                                      onPressed: () {
+                                        userController.unsubscribeToMatch(id);
+                                        setState(() {});
+                                      },
+                                      child: Text('Sair'))
+                                  : ElevatedButton(
                                       style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.resolveWith(
@@ -81,12 +87,20 @@ class _MatchDetailState extends State<MatchDetail> {
                                                       .colorScheme
                                                       .primary
                                                       .withOpacity(0.5))),
-                                      onPressed: () {
-                                        userController.unsubscribeToMatch(id);
-                                        setState(() {});
-                                      },
-                                      child: Text('Revogar vaga')),
-                                  ElevatedButton(
+                                      onPressed: () {},
+                                      child: Text('Sair')),
+                              alreadySubscribed
+                                  ? ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.resolveWith(
+                                                  (states) => Theme.of(context)
+                                                      .colorScheme
+                                                      .primary
+                                                      .withOpacity(0.5))),
+                                      onPressed: () {},
+                                      child: Text('Confirmar presença'))
+                                  : ElevatedButton(
                                       style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.resolveWith(
@@ -99,11 +113,11 @@ class _MatchDetailState extends State<MatchDetail> {
                                         setState(() {});
                                       },
                                       child: Text('Confirmar presença')),
-                                ],
-                              )
                             ],
-                          )),
-                    ]),
+                          )
+                        ],
+                      )),
+                ]),
               ),
             );
           } else {
