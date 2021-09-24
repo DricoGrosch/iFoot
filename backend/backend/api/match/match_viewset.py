@@ -6,6 +6,10 @@ from backend.serializers import *
 class MatchViewSet(LoginRequiredModelViewSet):
     serializer_class = MatchSerializer
     queryset = Match.objects.none()
+    def create(self, request, *args, **kwargs):
+        response = super(MatchViewSet, self).create(request, *args, **kwargs)
+        owner = 'setar o owner'
+        return response
 
     def get_queryset(self):
         if self.action == 'retrieve':

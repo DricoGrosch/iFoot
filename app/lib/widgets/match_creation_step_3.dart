@@ -94,7 +94,7 @@ class MatchCreationStep3 extends StatelessWidget {
                             .map<DropdownMenuItem>((group) {
                           return DropdownMenuItem(
                               value: group.id,
-                              child: Center(child: Text(group.name)));
+                              child: Center(child: Text(group.description)));
                         }).toList()
                       ]),
                 )

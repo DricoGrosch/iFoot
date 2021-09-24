@@ -43,7 +43,9 @@ class Match {
         date: DateTime.parse(json['date']),
         maxMembers: json['max_members'],
         group: json['group'] != null
-            ? new Group(id: json['group']['id'], name: json['group']['name'])
+            ? new Group(
+                id: json['group']['id'],
+                description: json['group']['description'])
             : null);
 
     if (json.containsKey('users')) {

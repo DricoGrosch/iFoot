@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:app/api/routes.dart';
 import 'package:app/api/services.dart';
 import 'package:app/models/group.dart';
+import 'package:dio/dio.dart';
 
 class GroupController {
   Group group;
@@ -17,9 +20,11 @@ class GroupController {
     }
   }
 
-  Future<Map<String, dynamic>> create() async {
-    Map<String, dynamic> response =
-        await Services.post(Routes.GROUP, {'name': group.name});
+  Future<Map<String, dynamic>> create(File image) async {
+    Map<String, dynamic> response = await Services.multiPartPost(Routes.GROUP, {
+      'description': group.description,
+      'image': await MultipartFile.fromFile(image.path, filename: image.path)
+    });
     return response.containsKey('errors') ? response['errors'] : null;
   }
 }

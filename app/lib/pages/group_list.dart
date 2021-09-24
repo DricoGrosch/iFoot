@@ -1,6 +1,6 @@
 import 'package:app/controllers/group_controller.dart';
-import 'package:app/models/User.dart';
 import 'package:app/models/group.dart';
+import 'package:app/pages/group_detail.dart';
 import 'package:app/pages/group_form.dart';
 import 'package:app/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +31,19 @@ class _GroupListState extends State<GroupList> {
                         Group group = Group.fromJson(data);
                         return Card(
                           child: ListTile(
-                            onTap: () => {},
-                            leading: Icon(Icons.people),
-                            title: Text(group.name),
+                            onTap: () => {
+                              Utils.changePage(
+                                  context, (context) => GroupDetail(group.id))
+                            },
+                            leading: Container(
+                              width: 60,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(image: group.getImage()),
+                              ),
+                            ),
+                            title: Text(group.description),
                           ),
                         );
                       }).toList()),

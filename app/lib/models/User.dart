@@ -42,8 +42,8 @@ class User {
         json['username'] ?? '',
         json['profile_image'] ?? null);
     user.groups = json['groups']
-        .map<Group>((jsonGroup) =>
-            new Group(id: jsonGroup['id'], name: jsonGroup['name']))
+        .map<Group>((jsonGroup) => new Group(
+            id: jsonGroup['id'], description: jsonGroup['description']))
         .toList();
     return user;
   }

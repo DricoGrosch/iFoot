@@ -7,7 +7,7 @@ from backend.api.user.user_viewset import UserRegisterAPIView
 router = DefaultRouter()
 router.register('user', UserViewSet)
 router.register('match', MatchViewSet)
-router.register('group', GroupViewSet)
+router.register('team', TeamViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('login/', CustomObtainAuthToken.as_view()),

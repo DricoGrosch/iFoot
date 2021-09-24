@@ -2,11 +2,11 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from backend.models import CustomUser
-from backend.serializers.group import GroupSerializer
+from backend.serializers.team import TeamSerializer
 
 
 class UserSerializer(ModelSerializer):
-    groups = GroupSerializer(many=True,read_only=True)
+    groups = TeamSerializer(many=True, read_only=True)
 
     class Meta:
         model = CustomUser

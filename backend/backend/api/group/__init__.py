@@ -1,1 +1,0 @@
-from .group_viewset import GroupViewSet

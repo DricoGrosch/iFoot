@@ -1,3 +1,4 @@
+import 'package:app/controllers/group_controller.dart';
 import 'package:flutter/cupertino.dart';
 
 class GroupDetail extends StatelessWidget {
@@ -6,6 +7,10 @@ class GroupDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('');
+    return FutureBuilder(
+        future: GroupController.fetchDetails(id),
+        builder: (context, snapshot) {
+          return Text('2');
+        });
   }
 }

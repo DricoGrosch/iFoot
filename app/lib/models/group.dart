@@ -1,10 +1,11 @@
 import 'package:app/models/User.dart';
+import 'package:flutter/cupertino.dart';
 
 class Group {
   int id;
-  String name;
+  String description, image;
   List<User> users;
-  Group({this.id, this.name, this.users}) {
+  Group({this.id, this.description, this.users, this.image}) {
     if (this.users == null) {
       this.users = [];
     }
@@ -12,7 +13,8 @@ class Group {
   static Group fromJson(Map<String, dynamic> json) {
     Group group = new Group(
       id: json['id'],
-      name: json['name'],
+      description: json['description'],
+      image: json['image'],
     );
     return group;
   }
@@ -20,7 +22,13 @@ class Group {
   Map<String, dynamic> toJson() {
     return {
       'id': this.id,
-      'name': this.name,
+      'description': this.description,
     };
+  }
+
+  ImageProvider getImage() {
+    return this.image != null
+        ? NetworkImage(this.image)
+        : AssetImage('assets/images/default_user_image.png');
   }
 }
