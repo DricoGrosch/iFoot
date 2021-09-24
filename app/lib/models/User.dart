@@ -1,4 +1,4 @@
-import 'package:app/models/group.dart';
+import 'package:app/models/team.dart';
 import 'package:flutter/cupertino.dart';
 
 class User {
@@ -12,7 +12,7 @@ class User {
       username,
       profileImage;
   static User appUser;
-  List<Group> groups;
+  List<Team> teams;
 
   static User getAppUser() {
     if (appUser == null) {
@@ -41,9 +41,9 @@ class User {
         json['last_name'] ?? '',
         json['username'] ?? '',
         json['profile_image'] ?? null);
-    user.groups = json['groups']
-        .map<Group>((jsonGroup) => new Group(
-            id: jsonGroup['id'], description: jsonGroup['description']))
+    user.teams = json['teams']
+        .map<Team>((jsonTeam) =>
+            new Team(id: jsonTeam['id'], description: jsonTeam['description']))
         .toList();
     return user;
   }

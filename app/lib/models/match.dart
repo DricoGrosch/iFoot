@@ -1,6 +1,6 @@
 import 'package:app/controllers/mapController.dart';
 import 'package:app/models/User.dart';
-import 'package:app/models/group.dart';
+import 'package:app/models/team.dart';
 import 'package:app/models/sport.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
@@ -13,7 +13,7 @@ class Match {
   bool public;
   Map<String, dynamic> sport;
   DateTime date;
-  Group group;
+  Team team;
   List<User> users = [];
   Match(
       {this.id,
@@ -24,7 +24,7 @@ class Match {
       this.sport,
       this.public = false,
       this.maxMembers,
-      this.group,
+      this.team,
       this.users}) {
     users = [];
   }
@@ -42,10 +42,10 @@ class Match {
         public: json['public'],
         date: DateTime.parse(json['date']),
         maxMembers: json['max_members'],
-        group: json['group'] != null
-            ? new Group(
-                id: json['group']['id'],
-                description: json['group']['description'])
+        team: json['team'] != null
+            ? new Team(
+                id: json['team']['id'],
+                description: json['team']['description'])
             : null);
 
     if (json.containsKey('users')) {
@@ -65,7 +65,7 @@ class Match {
       'date': DateFormat('yyyy-MM-dd').add_Hm().format(this.date),
       'sport': this.sport['id'],
       'public': this.public,
-      'group': this.group.id,
+      'team': this.team.id,
       'max_members': this.maxMembers,
       'users': this.users.map((u) => u.id).toList(),
     };

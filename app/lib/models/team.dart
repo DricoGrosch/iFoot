@@ -1,22 +1,22 @@
 import 'package:app/models/User.dart';
 import 'package:flutter/cupertino.dart';
 
-class Group {
+class Team {
   int id;
   String description, image;
   List<User> users;
-  Group({this.id, this.description, this.users, this.image}) {
+  Team({this.id, this.description, this.users, this.image}) {
     if (this.users == null) {
       this.users = [];
     }
   }
-  static Group fromJson(Map<String, dynamic> json) {
-    Group group = new Group(
+  static Team fromJson(Map<String, dynamic> json) {
+    Team team = new Team(
       id: json['id'],
       description: json['description'],
       image: json['image'],
     );
-    return group;
+    return team;
   }
 
   Map<String, dynamic> toJson() {

@@ -1,23 +1,24 @@
-import 'package:app/controllers/group_controller.dart';
-import 'package:app/models/group.dart';
-import 'package:app/pages/group_list.dart';
+import 'dart:io';
+
+import 'package:app/controllers/team_controller.dart';
+import 'package:app/models/team.dart';
+import 'package:app/pages/home.dart';
 import 'package:app/utils/utils.dart';
 import 'package:app/widgets/success_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
-class GroupForm extends StatefulWidget {
-  const GroupForm({Key key}) : super(key: key);
+class TeamForm extends StatefulWidget {
+  const TeamForm({Key key}) : super(key: key);
 
   @override
-  _GroupFormState createState() => _GroupFormState();
+  _TeamFormState createState() => _TeamFormState();
 }
 
-class _GroupFormState extends State<GroupForm> {
-  Group group = new Group();
+class _TeamFormState extends State<TeamForm> {
+  Team team = new Team();
   File image;
 
   Future<void> selectImage(ImageSource source) async {
@@ -27,10 +28,10 @@ class _GroupFormState extends State<GroupForm> {
     });
   }
 
-  GroupController groupController = new GroupController();
+  TeamController teamController = new TeamController();
   @override
   void initState() {
-    groupController.group = group;
+    teamController.team = team;
     super.initState();
   }
 
@@ -69,7 +70,7 @@ class _GroupFormState extends State<GroupForm> {
             FormBuilderTextField(
               onChanged: (value) {
                 setState(() {
-                  group.description = value;
+                  team.description = value;
                 });
               },
               name: 'description',
@@ -85,12 +86,12 @@ class _GroupFormState extends State<GroupForm> {
               child: ElevatedButton(
                 child: Text('Criar grupo'),
                 onPressed: () async {
-                  var error = await groupController.create(image);
+                  var error = await teamController.create(image);
                   error != null
                       ? Utils.showSnackBar(context, error)
                       : Utils.showMessageDialog(context, SuccessDialog(() {
                           Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (c) => GroupList()),
+                              MaterialPageRoute(builder: (c) => HomePage()),
                               (route) => false);
                         }));
                 },

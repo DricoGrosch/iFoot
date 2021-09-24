@@ -70,7 +70,7 @@ class MatchCreationStep3 extends StatelessWidget {
                   width: 300,
                   child: DropdownButton(
                       isExpanded: true,
-                      value: match.group != null ? match.group.id : '',
+                      value: match.team != null ? match.team.id : '',
                       icon: const Icon(Icons.arrow_downward),
                       iconSize: 24,
                       elevation: 16,
@@ -80,8 +80,8 @@ class MatchCreationStep3 extends StatelessWidget {
                         color: Colors.black,
                       ),
                       onChanged: (id) => {
-                            setState(() => match.group = User.getAppUser()
-                                .groups
+                            setState(() => match.team = User.getAppUser()
+                                .teams
                                 .toList()
                                 .firstWhere((g) => g.id == id))
                           },
@@ -90,11 +90,11 @@ class MatchCreationStep3 extends StatelessWidget {
                             value: '',
                             child: Center(child: Text('Selecione o grupo'))),
                         ...User.getAppUser()
-                            .groups
-                            .map<DropdownMenuItem>((group) {
+                            .teams
+                            .map<DropdownMenuItem>((team) {
                           return DropdownMenuItem(
-                              value: group.id,
-                              child: Center(child: Text(group.description)));
+                              value: team.id,
+                              child: Center(child: Text(team.description)));
                         }).toList()
                       ]),
                 )

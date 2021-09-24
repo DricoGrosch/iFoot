@@ -1,7 +1,7 @@
 
 from backend.api.auth.auth_viewset import LoginRequiredModelViewSet
 from backend.models import Group
-from backend.models.group import Team
+from backend.models.team import Team
 from backend.serializers.team import TeamSerializer
 
 

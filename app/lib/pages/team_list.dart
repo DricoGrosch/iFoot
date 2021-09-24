@@ -1,22 +1,22 @@
-import 'package:app/controllers/group_controller.dart';
-import 'package:app/models/group.dart';
-import 'package:app/pages/group_detail.dart';
-import 'package:app/pages/group_form.dart';
+import 'package:app/controllers/team_controller.dart';
+import 'package:app/models/team.dart';
+import 'package:app/pages/team_detail.dart';
+import 'package:app/pages/team_form.dart';
 import 'package:app/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class GroupList extends StatefulWidget {
-  const GroupList({Key key}) : super(key: key);
+class TeamList extends StatefulWidget {
+  const TeamList({Key key}) : super(key: key);
 
   @override
-  _GroupListState createState() => _GroupListState();
+  _TeamListState createState() => _TeamListState();
 }
 
-class _GroupListState extends State<GroupList> {
+class _TeamListState extends State<TeamList> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: GroupController.fetchGroups(),
+        future: TeamController.fetchTeams(),
         builder: (context, snapshot) {
           return snapshot.hasData
               ? RefreshIndicator(
@@ -28,28 +28,28 @@ class _GroupListState extends State<GroupList> {
                   child: Scaffold(
                       body: ListView(
                           children: snapshot.data.map<Widget>((data) {
-                        Group group = Group.fromJson(data);
+                        Team team = Team.fromJson(data);
                         return Card(
                           child: ListTile(
                             onTap: () => {
                               Utils.changePage(
-                                  context, (context) => GroupDetail(group.id))
+                                  context, (context) => TeamDetail(team.id))
                             },
                             leading: Container(
                               width: 60,
                               height: 50,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                image: DecorationImage(image: group.getImage()),
+                                image: DecorationImage(image: team.getImage()),
                               ),
                             ),
-                            title: Text(group.description),
+                            title: Text(team.description),
                           ),
                         );
                       }).toList()),
                       floatingActionButton: FloatingActionButton(
                         onPressed: () => {
-                          Utils.changePage(context, (context) => GroupForm())
+                          Utils.changePage(context, (context) => TeamForm())
                         },
                         backgroundColor: Colors.black,
                         child: Icon(Icons.add),

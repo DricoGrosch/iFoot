@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from backend.models.group import Team
+from backend.models.team import Team
 
 
 class TeamSerializer(ModelSerializer):

@@ -1,10 +1,10 @@
 import 'package:app/controllers/user_controller.dart';
 import 'package:app/models/User.dart';
-import 'package:app/pages/group_list.dart';
 import 'package:app/pages/login.dart';
 import 'package:app/pages/my_matches_list.dart';
 import 'package:app/pages/other_matches_list.dart';
 import 'package:app/pages/profile.dart';
+import 'package:app/pages/team_list.dart';
 import 'package:app/widgets/rating_stars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     Profile(),
     MyMatchesList(),
     OtherMatchesList(),
-    GroupList(),
+    TeamList(),
   ];
 
   @override

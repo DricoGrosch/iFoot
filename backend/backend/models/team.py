@@ -2,6 +2,6 @@ from django.contrib.auth.models import Group
 from django.db import models
 
 
-class Team(Group):
-    image = models.ImageField(null=True, blank=True)
+class Team(models.Model):
     description = models.CharField(max_length=255)
+    image = models.ImageField(null=True, blank=True)

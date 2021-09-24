@@ -44,7 +44,7 @@ class _MatchCreationState extends State<MatchCreation> {
         }
       case 2:
         {
-          if (!match.public && (match.group == null)) {
+          if (!match.public && (match.team == null)) {
             error = true;
             Utils.showSnackBar(context,
                 'Sua partida é privada. Informe o grupo a qual ela pertence');
