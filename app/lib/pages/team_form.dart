@@ -91,7 +91,10 @@ class _TeamFormState extends State<TeamForm> {
                       ? Utils.showSnackBar(context, error)
                       : Utils.showMessageDialog(context, SuccessDialog(() {
                           Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(builder: (c) => HomePage()),
+                              MaterialPageRoute(
+                                  builder: (c) => HomePage(
+                                        initialIndex: HomePage.GROUP_LIST,
+                                      )),
                               (route) => false);
                         }));
                 },

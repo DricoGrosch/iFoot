@@ -10,20 +10,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  static const int MY_MATCHES = 0;
+  static const int OTHER_MATCHES = 1;
+  static const int GROUP_LIST = 2;
+  static const int PROFILE = 3;
+
+  final int initialIndex;
+  const HomePage({Key key, this.initialIndex = HomePage.MY_MATCHES})
+      : super(key: key);
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(initialIndex: initialIndex);
 }
 
 class _HomePageState extends State<HomePage> {
+  final int initialIndex;
+  _HomePageState({this.initialIndex = HomePage.MY_MATCHES});
   UserController userController = new UserController(user: User.getAppUser());
-  int index = 1;
+  int index = HomePage.MY_MATCHES;
   List screens = [
-    Profile(),
     MyMatchesList(),
     OtherMatchesList(),
     TeamList(),
+    Profile(),
   ];
+  @override
+  void initState() {
+    index = initialIndex;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
