@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 
 class Team {
   int id;
-  String description, image;
+  String name, image;
   List<User> users;
-  Team({this.id, this.description, this.users, this.image}) {
+  Team({this.id, this.name, this.users, this.image}) {
     if (this.users == null) {
       this.users = [];
     }
@@ -13,7 +13,7 @@ class Team {
   static Team fromJson(Map<String, dynamic> json) {
     Team team = new Team(
       id: json['id'],
-      description: json['description'],
+      name: json['name'],
       image: json['image'],
     );
     return team;
@@ -22,7 +22,7 @@ class Team {
   Map<String, dynamic> toJson() {
     return {
       'id': this.id,
-      'description': this.description,
+      'name': this.name,
     };
   }
 

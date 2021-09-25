@@ -42,8 +42,8 @@ class User {
         json['username'] ?? '',
         json['profile_image'] ?? null);
     user.teams = json['teams']
-        .map<Team>((jsonTeam) =>
-            new Team(id: jsonTeam['id'], description: jsonTeam['description']))
+        .map<Team>(
+            (jsonTeam) => new Team(id: jsonTeam['id'], name: jsonTeam['name']))
         .toList();
     return user;
   }

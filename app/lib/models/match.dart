@@ -14,6 +14,7 @@ class Match {
   Map<String, dynamic> sport;
   DateTime date;
   Team team;
+  User owner;
   List<User> users = [];
   Match(
       {this.id,
@@ -25,6 +26,7 @@ class Match {
       this.public = false,
       this.maxMembers,
       this.team,
+      this.owner,
       this.users}) {
     users = [];
   }
@@ -42,10 +44,9 @@ class Match {
         public: json['public'],
         date: DateTime.parse(json['date']),
         maxMembers: json['max_members'],
+        owner: User.fromJson(json['owner']),
         team: json['team'] != null
-            ? new Team(
-                id: json['team']['id'],
-                description: json['team']['description'])
+            ? new Team(id: json['team']['id'], name: json['team']['name'])
             : null);
 
     if (json.containsKey('users')) {
@@ -65,6 +66,7 @@ class Match {
       'date': DateFormat('yyyy-MM-dd').add_Hm().format(this.date),
       'sport': this.sport['id'],
       'public': this.public,
+      'owner': this.owner.id,
       'team': this.team.id,
       'max_members': this.maxMembers,
       'users': this.users.map((u) => u.id).toList(),

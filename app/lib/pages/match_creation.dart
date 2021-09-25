@@ -1,4 +1,6 @@
 import 'package:app/controllers/match_controller.dart';
+import 'package:app/controllers/user_controller.dart';
+import 'package:app/models/User.dart';
 import 'package:app/models/match.dart';
 import 'package:app/pages/home.dart';
 import 'package:app/utils/utils.dart';
@@ -19,7 +21,7 @@ class MatchCreation extends StatefulWidget {
 }
 
 class _MatchCreationState extends State<MatchCreation> {
-  Match match = new Match(date: DateTime.now());
+  Match match = new Match(date: DateTime.now(), owner: User.getAppUser());
   ProgressTimeline stepper;
   int step = 0;
 
@@ -114,6 +116,7 @@ class _MatchCreationState extends State<MatchCreation> {
 
   @override
   void initState() {
+    UserController().syncData();
     stepper = new ProgressTimeline(
       states: [
         SingleState(stateTitle: "Modalidade"),
@@ -122,6 +125,7 @@ class _MatchCreationState extends State<MatchCreation> {
         SingleState(stateTitle: "Confirmação"),
       ],
     );
+
     super.initState();
   }
 

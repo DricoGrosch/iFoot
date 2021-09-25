@@ -70,10 +70,10 @@ class _TeamFormState extends State<TeamForm> {
             FormBuilderTextField(
               onChanged: (value) {
                 setState(() {
-                  team.description = value;
+                  team.name = value;
                 });
               },
-              name: 'description',
+              name: 'name',
               decoration: InputDecoration(
                 hintText: 'Nome do grupo',
                 contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),

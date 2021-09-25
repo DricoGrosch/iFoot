@@ -14,7 +14,8 @@ class MatchSerializer(ModelSerializer):
 
 class MatchDetailSerializer(ModelSerializer):
     users = UserSerializer(many=True, read_only=True)
-    group = TeamSerializer(read_only=True)
+    team = TeamSerializer(read_only=True)
+    owner = UserSerializer(read_only=True)
 
     class Meta:
         model = Match
@@ -22,8 +23,9 @@ class MatchDetailSerializer(ModelSerializer):
 
 
 class MatchShortSerializer(ModelSerializer):
-    group = TeamSerializer(read_only=True)
+    team = TeamSerializer(read_only=True)
+    owner = UserSerializer(read_only=True)
 
     class Meta:
         model = Match
-        fields = ['id', 'description', 'date', 'max_members', 'sport', 'team', 'public', 'address']
+        fields = ['id', 'description', 'date', 'max_members', 'sport', 'team', 'public', 'address','owner']

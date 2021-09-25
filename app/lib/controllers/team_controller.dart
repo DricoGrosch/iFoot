@@ -22,7 +22,7 @@ class TeamController {
 
   Future<Map<String, dynamic>> create(File image) async {
     Map<String, dynamic> response = await Services.multiPartPost(Routes.TEAM, {
-      'description': team.description,
+      'name': team.name,
       'image': await MultipartFile.fromFile(image.path, filename: image.path)
     });
     return response.containsKey('errors') ? response['errors'] : null;

@@ -6,7 +6,7 @@ from backend.serializers.team import TeamSerializer
 
 
 class UserSerializer(ModelSerializer):
-    groups = TeamSerializer(many=True, read_only=True)
+    teams = TeamSerializer(many=True, read_only=True)
 
     class Meta:
         model = CustomUser

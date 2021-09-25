@@ -43,7 +43,7 @@ class _TeamListState extends State<TeamList> {
                                 image: DecorationImage(image: team.getImage()),
                               ),
                             ),
-                            title: Text(team.description),
+                            title: Text(team.name),
                           ),
                         );
                       }).toList()),

@@ -6,10 +6,6 @@ from backend.serializers import *
 class MatchViewSet(LoginRequiredModelViewSet):
     serializer_class = MatchSerializer
     queryset = Match.objects.none()
-    def create(self, request, *args, **kwargs):
-        response = super(MatchViewSet, self).create(request, *args, **kwargs)
-        owner = 'setar o owner'
-        return response
 
     def get_queryset(self):
         if self.action == 'retrieve':
@@ -18,7 +14,7 @@ class MatchViewSet(LoginRequiredModelViewSet):
         if 'other' in self.request.GET:
             ids_to_exclude = []
             for m in Match.objects.all():
-                if not m.public and m.group not in self.request.user.groups.all():
+                if not m.public and m.team not in self.request.user.teams.all():
                     ids_to_exclude.append(m.id)
                 if self.request.user in m.users.all():
                     ids_to_exclude.append(m.id)
