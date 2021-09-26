@@ -56,10 +56,12 @@ class _TeamFormState extends State<TeamForm> {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: image != null
-                          ? FileImage(image)
-                          : AssetImage(
-                              'assets/images/default_user_image.png'))),
+                      image: team.image != null
+                          ? NetworkImage(team.image)
+                          : image != null
+                              ? FileImage(image)
+                              : AssetImage(
+                                  'assets/images/default_user_image.png'))),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -77,6 +79,7 @@ class _TeamFormState extends State<TeamForm> {
               ],
             ),
             FormBuilderTextField(
+              initialValue: team.name ?? '',
               onChanged: (value) {
                 setState(() {
                   team.name = value;
@@ -92,22 +95,51 @@ class _TeamFormState extends State<TeamForm> {
             ),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                child: Text('Criar grupo'),
-                onPressed: () async {
-                  var error = await teamController.create(image);
-                  error != null
-                      ? Utils.showSnackBar(context, error)
-                      : Utils.showMessageDialog(context, SuccessDialog(() {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (c) => HomePage(
-                                        initialIndex: HomePage.TEAM_LIST,
-                                      )),
-                              (route) => false);
-                        }));
-                },
-              ),
+              child: team.id != null
+                  ? ElevatedButton(
+                      child: Text('Editar grupo'),
+                      onPressed: () async {
+                        if (team.name == null || team.name.isEmpty) {
+                          Utils.showSnackBar(
+                              context, 'O campo nome é obrigatório;');
+                          return;
+                        }
+                        var error = await teamController.update(image);
+                        error != null
+                            ? Utils.showSnackBar(context, error)
+                            : Utils.showMessageDialog(context,
+                                SuccessDialog(() {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (c) => HomePage(
+                                              initialIndex: HomePage.TEAM_LIST,
+                                            )),
+                                    (route) => false);
+                              }));
+                      },
+                    )
+                  : ElevatedButton(
+                      child: Text('Criar grupo'),
+                      onPressed: () async {
+                        if (team.name == null || team.name.isEmpty) {
+                          Utils.showSnackBar(
+                              context, 'O campo nome é obrigatório;');
+                          return;
+                        }
+                        var error = await teamController.create(image);
+                        error != null
+                            ? Utils.showSnackBar(context, error)
+                            : Utils.showMessageDialog(context,
+                                SuccessDialog(() {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (c) => HomePage(
+                                              initialIndex: HomePage.TEAM_LIST,
+                                            )),
+                                    (route) => false);
+                              }));
+                      },
+                    ),
             ),
             SizedBox(
               width: double.infinity,

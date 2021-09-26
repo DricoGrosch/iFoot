@@ -1,4 +1,3 @@
-import 'package:app/models/team.dart';
 import 'package:flutter/cupertino.dart';
 
 class User {
@@ -29,7 +28,7 @@ class User {
       this.firstName = '',
       this.lastName = '',
       this.username = '',
-      this.profileImage]) {}
+      this.profileImage]);
   static User fromJson(Map<String, dynamic> json) {
     User user = new User(
         json['token'] ?? '',

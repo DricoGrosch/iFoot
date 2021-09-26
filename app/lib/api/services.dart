@@ -15,6 +15,16 @@ class Services {
     return jsonDecode(response.body);
   }
 
+  static Future put(String route, Map<String, dynamic> body) async {
+    var response = await http.put(Uri.parse('$SERVER_HOST/api/$route'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'token ${User.getAppUser().token}'
+        },
+        body: jsonEncode(body));
+    return jsonDecode(response.body);
+  }
+
   static fileUpload(String route, Map<String, dynamic> body) async {
     FormData data = FormData.fromMap(body);
     Dio dio = new Dio();
@@ -36,10 +46,6 @@ class Services {
       'Authorization': 'token ${User.getAppUser().token}'
     });
     return jsonDecode(response.body);
-  }
-
-  static Future put() async {
-    return null;
   }
 
   static Future delete() async {

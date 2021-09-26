@@ -10,7 +10,6 @@ class MatchCreationStep3 extends StatelessWidget {
   List teams;
   MatchCreationStep3(this.match, this.setState, {Key key}) : super(key: key) {
     teams = TeamController.fetchTeams();
-    print('object');
   }
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(

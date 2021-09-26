@@ -1,5 +1,4 @@
 import 'package:app/controllers/team_controller.dart';
-import 'package:app/models/team.dart';
 import 'package:app/pages/team_detail.dart';
 import 'package:app/pages/team_form.dart';
 import 'package:app/utils/utils.dart';

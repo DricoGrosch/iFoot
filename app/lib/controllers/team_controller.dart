@@ -26,8 +26,21 @@ class TeamController {
       'name': team.name,
     });
     if (image != null) {
-      Map<String, dynamic> imageResponse =
-          await Services.fileUpload(Routes.TEAM_IMAGE_UPLOAD, {
+      await Services.fileUpload(Routes.TEAM_IMAGE_UPLOAD, {
+        'image': await MultipartFile.fromFile(image.path, filename: image.path),
+        'id': response['id'],
+      });
+    }
+    return response.containsKey('errors') ? response['errors'] : null;
+  }
+
+  Future<Map<String, dynamic>> update(File image) async {
+    Map<String, dynamic> response =
+        await Services.put('${Routes.TEAM}${team.id}/', {
+      'name': team.name,
+    });
+    if (image != null) {
+      await Services.fileUpload(Routes.TEAM_IMAGE_UPLOAD, {
         'image': await MultipartFile.fromFile(image.path, filename: image.path),
         'id': response['id'],
       });
