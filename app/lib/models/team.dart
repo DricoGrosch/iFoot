@@ -5,6 +5,7 @@ class Team {
   int id;
   String name, image;
   List<User> users;
+
   Team({this.id, this.name, this.users, this.image}) {
     if (this.users == null) {
       this.users = [];
@@ -16,6 +17,8 @@ class Team {
       name: json['name'],
       image: json['image'],
     );
+    team.users =
+        json['users'].map<User>((json) => User.fromJson(json)).toList();
     return team;
   }
 

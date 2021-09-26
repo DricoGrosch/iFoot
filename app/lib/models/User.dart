@@ -11,8 +11,8 @@ class User {
       lastName,
       username,
       profileImage;
+
   static User appUser;
-  List<Team> teams;
 
   static User getAppUser() {
     if (appUser == null) {
@@ -29,8 +29,7 @@ class User {
       this.firstName = '',
       this.lastName = '',
       this.username = '',
-      this.profileImage]);
-
+      this.profileImage]) {}
   static User fromJson(Map<String, dynamic> json) {
     User user = new User(
         json['token'] ?? '',
@@ -41,10 +40,6 @@ class User {
         json['last_name'] ?? '',
         json['username'] ?? '',
         json['profile_image'] ?? null);
-    user.teams = json['teams']
-        .map<Team>(
-            (jsonTeam) => new Team(id: jsonTeam['id'], name: jsonTeam['name']))
-        .toList();
     return user;
   }
 

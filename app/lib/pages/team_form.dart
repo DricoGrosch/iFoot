@@ -11,26 +11,33 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:image_picker/image_picker.dart';
 
 class TeamForm extends StatefulWidget {
-  const TeamForm({Key key}) : super(key: key);
+  final Team team;
+
+  const TeamForm({Key key, this.team}) : super(key: key);
 
   @override
-  _TeamFormState createState() => _TeamFormState();
+  _TeamFormState createState() => _TeamFormState(team: team);
 }
 
 class _TeamFormState extends State<TeamForm> {
-  Team team = new Team();
+  Team team;
   File image;
+  _TeamFormState({this.team});
+  TeamController teamController = new TeamController();
 
   Future<void> selectImage(ImageSource source) async {
     XFile selected = await ImagePicker().pickImage(source: source);
+    if (selected == null) {
+      return;
+    }
     setState(() {
       image = File(selected.path);
     });
   }
 
-  TeamController teamController = new TeamController();
   @override
   void initState() {
+    team = team ?? new Team();
     teamController.team = team;
     super.initState();
   }
@@ -38,7 +45,9 @@ class _TeamFormState extends State<TeamForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Criação de Grupo')),
+        appBar: AppBar(
+            title:
+                team.id != null ? Text(team.name) : Text('Criação de Grupo')),
         body: Column(
           children: [
             Container(
@@ -93,7 +102,7 @@ class _TeamFormState extends State<TeamForm> {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                   builder: (c) => HomePage(
-                                        initialIndex: HomePage.GROUP_LIST,
+                                        initialIndex: HomePage.TEAM_LIST,
                                       )),
                               (route) => false);
                         }));

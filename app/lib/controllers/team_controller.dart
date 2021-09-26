@@ -14,17 +14,24 @@ class TeamController {
 
   static fetchTeams({Map<String, dynamic> filters}) async {
     try {
-      return await Services.get(Routes.TEAM, filters);
+      List teams = await Services.get(Routes.TEAM, filters);
+      return teams.map((json) => Team.fromJson(json));
     } catch (e) {
       return [];
     }
   }
 
   Future<Map<String, dynamic>> create(File image) async {
-    Map<String, dynamic> response = await Services.multiPartPost(Routes.TEAM, {
+    Map<String, dynamic> response = await Services.post(Routes.TEAM, {
       'name': team.name,
-      'image': await MultipartFile.fromFile(image.path, filename: image.path)
     });
+    if (image != null) {
+      Map<String, dynamic> imageResponse =
+          await Services.fileUpload(Routes.TEAM_IMAGE_UPLOAD, {
+        'image': await MultipartFile.fromFile(image.path, filename: image.path),
+        'id': response['id'],
+      });
+    }
     return response.containsKey('errors') ? response['errors'] : null;
   }
 }

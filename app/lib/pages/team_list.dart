@@ -27,8 +27,7 @@ class _TeamListState extends State<TeamList> {
                   },
                   child: Scaffold(
                       body: ListView(
-                          children: snapshot.data.map<Widget>((data) {
-                        Team team = Team.fromJson(data);
+                          children: snapshot.data.map<Widget>((team) {
                         return Card(
                           child: ListTile(
                             onTap: () => {

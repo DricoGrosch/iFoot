@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
   static const int MY_MATCHES = 0;
   static const int OTHER_MATCHES = 1;
-  static const int GROUP_LIST = 2;
+  static const int TEAM_LIST = 2;
   static const int PROFILE = 3;
 
   final int initialIndex;
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('Minhas partidas'),
                 onTap: () {
                   Navigator.pop(context);
-                  setState(() => {index = 1});
+                  setState(() => {index = HomePage.MY_MATCHES});
                 },
               ),
               ListTile(
@@ -70,15 +70,15 @@ class _HomePageState extends State<HomePage> {
                 title: const Text('Outras partidas'),
                 onTap: () {
                   Navigator.pop(context);
-                  setState(() => {index = 2});
+                  setState(() => {index = HomePage.OTHER_MATCHES});
                 },
               ),
               ListTile(
                 leading: Icon(Icons.group),
-                title: Text('Meus Grupos'),
+                title: Text('Minhas equipes'),
                 onTap: () {
                   Navigator.pop(context);
-                  setState(() => {index = 3});
+                  setState(() => {index = HomePage.TEAM_LIST});
                 },
               ),
               ListTile(

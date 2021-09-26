@@ -1,6 +1,4 @@
-
 from backend.api.auth.auth_viewset import LoginRequiredModelViewSet
-from backend.models import Group
 from backend.models.team import Team
 from backend.serializers.team import TeamSerializer
 
@@ -10,10 +8,10 @@ class TeamViewSet(LoginRequiredModelViewSet):
     serializer_class = TeamSerializer
 
     def get_queryset(self):
-        teams = self.request.user.teams.all()
-        return teams
+        return self.request.user.team_set.all()
+
 
     def create(self, request, *args, **kwargs):
         response = super(TeamViewSet, self).create(request, *args, **kwargs)
-        self.request.user.teams.add(Team.objects.get(id=response.data['id']))
+        Team.objects.get(id=response.data['id']).users.add(self.request.user)
         return response

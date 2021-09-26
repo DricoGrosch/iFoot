@@ -1,5 +1,8 @@
 import 'package:app/controllers/team_controller.dart';
+import 'package:app/pages/team_form.dart';
+import 'package:app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class TeamDetail extends StatelessWidget {
   final int id;
@@ -10,7 +13,23 @@ class TeamDetail extends StatelessWidget {
     return FutureBuilder(
         future: TeamController.fetchDetails(id),
         builder: (context, snapshot) {
-          return Text('2');
+          return snapshot.hasData
+              ? Scaffold(
+                  appBar: AppBar(),
+                  body: Column(children: [
+                    Text(snapshot.data.name),
+                    TextButton(
+                        onPressed: () {
+                          Utils.changePage(
+                              context,
+                              (context) => TeamForm(
+                                    team: snapshot.data,
+                                  ));
+                        },
+                        child: Icon(Icons.edit))
+                  ]),
+                )
+              : Center(child: CircularProgressIndicator());
         });
   }
 }

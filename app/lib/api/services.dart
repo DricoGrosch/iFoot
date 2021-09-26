@@ -15,7 +15,7 @@ class Services {
     return jsonDecode(response.body);
   }
 
-  static multiPartPost(String route, Map<String, dynamic> body) async {
+  static fileUpload(String route, Map<String, dynamic> body) async {
     FormData data = FormData.fromMap(body);
     Dio dio = new Dio();
     var response = await dio.post(

@@ -1,3 +1,3 @@
-from .team import Group
+from .team import Team
 from .custom_user import CustomUser
 from .match import Match

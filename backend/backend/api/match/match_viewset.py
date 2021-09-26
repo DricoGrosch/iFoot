@@ -14,7 +14,7 @@ class MatchViewSet(LoginRequiredModelViewSet):
         if 'other' in self.request.GET:
             ids_to_exclude = []
             for m in Match.objects.all():
-                if not m.public and m.team not in self.request.user.teams.all():
+                if not m.public and m.team not in self.request.user.team_set.all():
                     ids_to_exclude.append(m.id)
                 if self.request.user in m.users.all():
                     ids_to_exclude.append(m.id)

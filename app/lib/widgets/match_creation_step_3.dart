@@ -1,4 +1,4 @@
-import 'package:app/models/User.dart';
+import 'package:app/controllers/team_controller.dart';
 import 'package:app/models/match.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +7,11 @@ import 'package:intl/intl.dart';
 class MatchCreationStep3 extends StatelessWidget {
   final Match match;
   final Function setState;
-  const MatchCreationStep3(this.match, this.setState, {Key key})
-      : super(key: key);
+  List teams;
+  MatchCreationStep3(this.match, this.setState, {Key key}) : super(key: key) {
+    teams = TeamController.fetchTeams();
+    print('object');
+  }
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         initialDate: DateTime.now(),
@@ -80,21 +83,16 @@ class MatchCreationStep3 extends StatelessWidget {
                         color: Colors.black,
                       ),
                       onChanged: (id) => {
-                            setState(() => match.team = User.getAppUser()
-                                .teams
-                                .toList()
-                                .firstWhere((g) => g.id == id))
+                            setState(() => match.team =
+                                teams.toList().firstWhere((g) => g.id == id))
                           },
                       items: [
                         DropdownMenuItem(
                             value: '',
                             child: Center(child: Text('Selecione o grupo'))),
-                        ...User.getAppUser()
-                            .teams
-                            .map<DropdownMenuItem>((team) {
+                        ...teams.map<DropdownMenuItem>((t) {
                           return DropdownMenuItem(
-                              value: team.id,
-                              child: Center(child: Text(team.name)));
+                              value: t.id, child: Center(child: Text(t.name)));
                         }).toList()
                       ]),
                 )
