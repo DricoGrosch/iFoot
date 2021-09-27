@@ -1,3 +1,4 @@
+import 'package:app/models/team.dart';
 import 'package:flutter/cupertino.dart';
 
 class User {
@@ -10,7 +11,7 @@ class User {
       lastName,
       username,
       profileImage;
-
+  List<Team> teams;
   static User appUser;
 
   static User getAppUser() {
@@ -39,6 +40,11 @@ class User {
         json['last_name'] ?? '',
         json['username'] ?? '',
         json['profile_image'] ?? null);
+    if (json.containsKey('teams')) {
+      var teams =
+          json['teams'].map<Team>((data) => Team.fromJson(data)).toList();
+      user.teams = teams;
+    }
     return user;
   }
 
