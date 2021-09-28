@@ -49,14 +49,27 @@ class _HomePageState extends State<HomePage> {
         body: screens[index],
         drawer: Drawer(
           child: ListView(
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.only(top: 25),
             children: [
-              UserAccountsDrawerHeader(
-                accountName: Text(User.getAppUser().username),
-                accountEmail: RatingStars(4),
-                currentAccountPicture: CircleAvatar(
-                    backgroundImage: User.getAppUser().getProfileImage()),
+              Row(
+                children: [
+                  Container(
+                      width: 100,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: User.getAppUser().getProfileImage()),
+                      )),
+                  Column(
+                    children: [
+                      Text(User.getAppUser().username),
+                      RatingStars(4)
+                    ],
+                  )
+                ],
               ),
+              Divider(),
               ListTile(
                 leading: Icon(Icons.supervised_user_circle),
                 title: const Text('Minhas partidas'),

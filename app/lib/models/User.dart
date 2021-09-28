@@ -2,7 +2,7 @@ import 'package:app/models/team.dart';
 import 'package:flutter/cupertino.dart';
 
 class User {
-  int id;
+  int id, rating_average;
   String email,
       password,
       password2,
